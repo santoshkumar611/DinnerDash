@@ -1,0 +1,19 @@
+<div class = "container well" style= "width:500px">
+<%=link_to "add category",newcategory_path,class: "btn btn-success" %>
+<table class="table">
+    <thead>
+      <tr>
+        <th>category name</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @categories.each do |category| %>
+      <tr class="success">
+        <td><%=category.name %></td>
+        <td><%=link_to "delete",deletecategory_path(category.id),data: { confirm: 'Are you sure? your a admin' } %></td>  
+      </tr>
+    <%end%>
+    </tbody>
+  </table>
+ 
+</div>

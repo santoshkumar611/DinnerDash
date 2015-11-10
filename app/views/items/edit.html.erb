@@ -1,0 +1,13 @@
+<div class = "container well" style = "width:500px">
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+  <h2> edit item </h2>
+ <%= form_for @item do |f| %>
+  item name:  <%= f.text_field "name",placeholder: "enter item name",class: "form form-control",required: true%><br>
+  item description: <%= f.text_area "description",placeholder: "enter about item",class: "form form-control",required: true%><br>
+  item price:<%= f.number_field "price",placeholder: "enter price ",class: "form form-control",required: true%><br>
+  select category: <%= f.collection_select "category_id",Category.all, :id,:name%><br>
+  <%= f.submit "update item",class: "btn btn-success"%><br>
+ <%end%>
+</div>

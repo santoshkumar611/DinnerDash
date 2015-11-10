@@ -1,0 +1,5 @@
+      invoke  active_record
+      create    db/migrate/20150904120946_create_users.rb
+      create    app/models/user.rb
+      invoke    rspec
+      create      spec/models/user_spec.rb
