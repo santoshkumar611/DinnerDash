@@ -1,11 +1,36 @@
 <div class = "container login">
- <% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
-  <% end %>
- <h2> login page </h2>
- <%= form_tag(login_logincheck_path) do %>
-  username or email<%= text_field_tag "username",nil,placeholder: "enter user name",class: "form form-control",required: true%><br>
-  password: <%= password_field_tag "password",nil,placeholder: "enter user name",class: "form form-control",required: true%><br>
-  <%= submit_tag "login",class: "btn btn-success"%> 
- <%end-%>
+    <% if flash[:notice] %>
+     <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+    <h4> login page </h4>
+    <%= form_tag(login_logincheck_path,class: "form-login") do %>
+     username or email:
+     <%= text_field_tag "username",nil,placeholder: "enter user name",class: "form form-control input-sm chat-input",required: true%><br>
+     password:
+     <%= password_field_tag "password",nil,placeholder: "enter user name",class: "form form-control input-sm chat-input",required: true%><br>
+     <div class='wrapper'>
+      <span class="group-btn">
+       <%= submit_tag "login",class: "btn btn-primary btn-md "%>
+      </span>
+     </div>
+    <%end-%>
 </div>
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-md-offset-5 col-md-3">
+            <div class="form-login">
+            <h4>Welcome back.</h4>
+            <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
+            </br>
+            <input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
+            </br>
+            <div class="wrapper">
+            <span class="group-btn">     
+                <a href="#" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>
+            </span>
+            </div>
+            </div>
+        
+        </div>
+    </div>
+</div> -->
