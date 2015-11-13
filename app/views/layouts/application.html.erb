@@ -41,11 +41,12 @@
               <li><a href="#">manage orders</a></li>
               <li><a href="/items">manege items</a></li>
             <% else %>
-              <li><a href="#">items</a></li>
+              <li><a href="/items">items</a></li>
               
            <% end %>  
           <%end%> 
           <%if !current_user %>
+           <li><a href="/items">items</a></li>
            <li><a href="#">cart</a></li>
           <% end %> 
             

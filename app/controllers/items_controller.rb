@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
       @item.image = file_name
        if @item.save
           flash[:notice] = "success fully registered"
-          redirect_to allitems_path
+          redirect_to items_path
        else
         flash[:notice] = @item.errors.messages
          render "new"
