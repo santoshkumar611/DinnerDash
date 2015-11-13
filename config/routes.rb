@@ -8,6 +8,7 @@ Rails.application.routes.draw do
    
    get 'users/new' => 'users#new', as: :signup
    post 'users/create' => 'users#create', as: :users
+   get 'users' => 'users#index',as: :all_users
    # routes for admins controller
    
    get 'admins/new' => 'admins#new', as: :adminsignup

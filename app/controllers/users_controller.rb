@@ -3,7 +3,9 @@ class UsersController < ApplicationController
   	@user = User.new
   	flash[:notice] = ""
   end
-
+  def index
+    @users = User.where(is_admin: false).pluck(:id,:full_name,:display_name,:email)
+  end
   def create
     @user = User.new(user_details)  
     # get the file_type that have been uploaded

@@ -1,4 +1,7 @@
 class LoginController < ApplicationController
+  def login
+   session[:user_id] = nil
+  end 
  def logincheck
    user = User.find_by_email(params[:username]) 
    unless user
@@ -7,7 +10,11 @@ class LoginController < ApplicationController
    if user && user.authenticate(params[:password])
      session[:user_id] = user.id
      flash[:notice] = "login success retry"
-    redirect_to root_path
+     if user.is_admin
+      redirect_to items_path # need to modify
+     else
+      redirect_to items_path
+     end
    else 
    	flash[:notice] = "login failed retry"
    	render "login"
