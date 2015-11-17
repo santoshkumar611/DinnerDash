@@ -1,15 +1,38 @@
-<div class = "container well " style = "width:500px">
- <% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
-  <% end %>
- <h2> user registration page </h2>
- <%= form_for(@user, url: users_path) do |f| %>
- username: <%= f.text_field :full_name,placeholder: "enter user name",class: "form form-control",required: true%>
- displayname: <%= f.text_field :display_name,placeholder: "enter display name",class: "form form-control"%><span>optional</span><br>
- email: <%= f.email_field :email,placeholder: "enter email",class: "form form-control",required: true%>
- password: <%= f.password_field :password,placeholder: "enter password",class: "form form-control",required: true %>
- confirm password<%= f.password_field :password_confirmation,placeholder: "reenter password ",class: "form form-control",required: true %><br>
- image: <%= f.file_field :image%><br>
- <%=f.submit "register" %>
- <%end%>
+<div class = "container registration">
+	<div class = "row reg-form">
+  	<div class = "panel panel-primary">
+  		<div class = "panel-heading">
+  			<% if flash[:notice] %>
+    	 		<div class="notice"><%= flash[:notice] %></div>
+      	<% end %>
+      	<h4> user registration page </h4>
+      </div>	
+      <%= form_for(@user, url: users_path) do |f| %>
+ 				<strong>username:</strong>
+ 				<div class="form-group">
+ 					<%= f.text_field :full_name,placeholder: "enter user name",class: "form form-control" ,required: true%>
+ 				</div>
+ 				<strong>displayname:</strong> 
+ 				<div class="form-group">
+ 					<%= f.text_field :display_name,placeholder: "enter display name (optional)",class: "form form-control"%>
+
+ 				</div>
+ 				<strong>email:</strong> 
+ 				<div class="form-group">
+ 					<%= f.email_field :email,placeholder: "enter email",class: "form form-control",required: true%>
+ 				</div>
+ 				<strong>password:</strong>
+ 				<div class="form-group"> 
+ 					<%= f.password_field :password,placeholder: "enter password",class: "form form-control",required: true %>
+ 				</div>
+ 				<strong>confirm password:</strong>
+ 				<div class="form-group">
+ 					<%= f.password_field :password_confirmation,placeholder: "reenter password ",class: "form form-control",required: true %>
+ 				</div>	
+ 				<strong>image:</strong> 
+ 				 <%= f.file_field :image,class: "form-control input-sm"%>
+ 				<%=f.submit "register" ,class: "btn btn-success btn-block"%>
+ 			<%end%>
+ 		</div>
+	</div>
 </div>

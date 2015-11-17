@@ -16,3 +16,26 @@
 		.panel-body{
 			display: none;
 		}
+		.registration {
+			margin-left: 100px;
+			padding: 20px;
+			width: 500px;
+		}
+		strong{
+			margin-left: 60px;
+			margin-top: 10px;
+			margin-bottom: 5px;
+		}
+		.form-control {
+			margin-left: 60px;
+			margin-top: 5px;
+			margin-bottom: 5px;
+			width: 250px;
+		}
+
+		@media (max-width:1500px ){
+		 .user{
+	         width: 100%;
+	         position: relative;
+           } 	
+		}

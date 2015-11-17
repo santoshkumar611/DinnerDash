@@ -59,7 +59,8 @@
   width: 200px;
   height: 100%;
   color: #e1ffff;
-  
+  margin-right: 10px;
+  float: left;
 }
 .nav-side-menu .brand {
   background-color: #23282e;
@@ -230,6 +231,8 @@
      color: #f39c12;
  }
  .page-content {
-  top : 50px;
+  
   margin-left: 200px;
+  top : 50px;
  }
+ 

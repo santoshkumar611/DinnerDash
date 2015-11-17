@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   	flash[:notice] = ""
   end
   def index
-    @users = User.where(is_admin: false).pluck(:id,:full_name,:display_name,:email)
+    @users = User.where(is_admin: false).pluck(:id,:full_name,:display_name,:email,:set)
   end
   def create
     @user = User.new(user_details)  

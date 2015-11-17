@@ -1,7 +1,7 @@
-<% if current_user.is_admin %>
- <%=link_to "Add Item",new_item_path,class: "btn btn-primary btn-sm"%>
-<% end %>
 <div class="bs-example">
+  <% if current_user.is_admin %>
+    <%=link_to "Add Item",new_item_path,class: "btn btn-primary btn-sm"%>
+  <% end %>
   <div class="container">
     <div class="row">
       <% @items.each do |item| %>

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
   <title>DinnerDash</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
   <div class="container-fluid">
@@ -57,7 +59,7 @@
 
 <div class="nav-side-menu fixed-top">
     <div class="brand"><% if current_user %>
-        <h2><%= current_user.full_name %></h2>  
+        <h4><%= current_user.full_name %></h4>  
       <% else %>
         Guest
       <% end %></div>
@@ -73,8 +75,8 @@
                 </li>
               <% if current_user %>
                 <% if current_user.is_admin? %>
-                  <li><a href="/users">manage users</a></li>
-                  <li><a href="/categories/index">manage categories</a></li>
+                  <li><a href="/users"><i class="fa fa-users fa-lg"></i> manage users</a></li>
+                  <li><a href="/categories/index"><i class="fa fa-th-large fa-lg"></i>manage categories</a></li>
                 <%else%>
                   <li><a href="#"><i class="fa fa-history fa-lg"></i>  your's orders</a></li>
 
