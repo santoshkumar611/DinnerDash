@@ -9,117 +9,104 @@
 
 </head>
 <body>
-  <div class="container-fluid">
-    <!-- Second navbar for categories -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Dinner dash</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-           
-              <% if current_user %>
-                <li>  <%= link_to "Sign out", signout_path%></li>
-              <% else %>
-                <li> <%= link_to "Sign in", root_path%>  </li>
-              <% end %>
-            
-            
-              <% if !current_user %>
-               <li> <%= link_to "signup", signup_path %></li>  
-              <% end %>
-            
-           <% if current_user %>
-            <% if current_user.is_admin? %>
-              <li><a href="#">manage orders</a></li>
-              <li><a href="/items">manege items</a></li>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Dinner dash</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+         
+            <% if current_user %>
+              <li>  <%= link_to "Sign out", signout_path%></li>
             <% else %>
-              <li><a href="/items">items</a></li>
-              
-           <% end %>  
-          <%end%> 
-          <%if !current_user %>
-           <li><a href="/items">items</a></li>
-           <li><a href="#">cart</a></li>
-          <% end %> 
+              <li> <%= link_to "Sign in", root_path%>  </li>
+            <% end %>
+          
+          
+            <% if !current_user %>
+             <li> <%= link_to "signup", signup_path %></li>  
+            <% end %>
+          
+         <% if current_user %>
+          <% if current_user.is_admin? %>
+            <li><a href="#">manage orders</a></li>
+            <li><a href="/items">manege items</a></li>
+          <% else %>
+            <li><a href="/items">items</a></li>
             
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container -->
-    </nav><!-- /.navbar -->
-       <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+         <% end %>  
+        <%end%> 
+        <%if !current_user %>
+         <li><a href="/items">items</a></li>
+         <li><a href="#">cart</a></li>
+        <% end %> 
+          
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav><!-- /.navbar -->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <div class="nav-side-menu fixed-top ">
+        <div class="brand"><% if current_user %>
+            <h4><%= current_user.full_name %></h4>  
+          <% else %>
+            Guest
+          <% end %></div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+      
+            <div class="menu-list">
+      
+                <ul id="menu-content" class="menu-content collapse out">
+                    <li>
+                      <a href="#">
+                      <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                      </a>
+                    </li>
+                  <% if current_user %>
+                    <% if current_user.is_admin? %>
+                      <li><a href="/users"><i class="fa fa-users fa-lg"></i> manage users</a></li>
+                      <li><a href="/categories/index"><i class="fa fa-th-large fa-lg"></i>manage categories</a></li>
+                    <%else%>
+                      <li><a href="#"><i class="fa fa-history fa-lg"></i>  your's orders</a></li>
 
-<div class="nav-side-menu fixed-top">
-    <div class="brand"><% if current_user %>
-        <h4><%= current_user.full_name %></h4>  
-      <% else %>
-        Guest
-      <% end %></div>
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-  
-        <div class="menu-list">
-  
-            <ul id="menu-content" class="menu-content collapse out">
-                <li>
-                  <a href="#">
-                  <i class="fa fa-dashboard fa-lg"></i> Dashboard
-                  </a>
-                </li>
-              <% if current_user %>
-                <% if current_user.is_admin? %>
-                  <li><a href="/users"><i class="fa fa-users fa-lg"></i> manage users</a></li>
-                  <li><a href="/categories/index"><i class="fa fa-th-large fa-lg"></i>manage categories</a></li>
-                <%else%>
-                  <li><a href="#"><i class="fa fa-history fa-lg"></i>  your's orders</a></li>
-
-                <%end%> 
-                <li>
-                 <a href="#">
-                  <i class="fa fa-user fa-lg"></i> Profile
-                 </a>
-                </li>
-              <%end%> 
-              <% if !current_user %> 
-                <li data-toggle="collapse" data-target="#products" class="collapsed active">
-                    <a href="#"><i class="fa fa-gift fa-lg"></i> Men <span class="arrow"></span></a>
-                </li>
-              
-                <ul class="sub-menu collapse" id="products">
-                  <li class="active"><a href="#">starters</a></li>
-                  <li><a href="#">category1</a></li>
-                  <li><a href="#">category2</a></li>
-                  <li><a href="#">category3</a></li>
+                    <%end%> 
+                    <li>
+                     <a href="#">
+                      <i class="fa fa-user fa-lg"></i> Profile
+                     </a>
+                    </li>
+                  <%end%> 
+                  <% if !current_user %> 
+                    <li data-toggle="collapse" data-target="#products" class="collapsed active">
+                        <a href="#"><i class="fa fa-gift fa-lg"></i> Menu <span class="arrow"></span></a>
+                    </li>
+                  
+                    <ul class="sub-menu collapse" id="products">
+                      <li class="active"><a href="#">starters</a></li>
+                      <li><a href="#">category1</a></li>
+                      <li><a href="#">category2</a></li>
+                      <li><a href="#">category3</a></li>
+                    </ul>
+                  <%end%>
                 </ul>
-              <%end%>
-            </ul>
-     </div>
-</div>
-<div class = "page-content">
-  <%= yield %>
-</div>   
-    <!-- Social Footer, Colour Matching Icons -->
-<!-- Include Font Awesome Stylesheet in Header -->
-
-<!-- // -->
-<div class="navbar navbar-inverse navbar-fixed-bottom">
- <div class="container">
-      <p class="navbar-text pull-left">© 2015 - Site Built By santosh kumar 
-      </p>
-
+         </div>
+  </div>      
+  <div class = "page-content">
+    <%= yield %>
   </div>
-    
-    
+  <div class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container">
+      <p class="navbar-text pull-left">© 2015 - Site Built By santosh kumar </p>
+    </div>
   </div>
-  </div>
-    <!-- /#wrapper -->
 </body>
 </html>
 

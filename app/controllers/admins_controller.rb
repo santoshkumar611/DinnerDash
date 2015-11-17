@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  layout 'admin'
+  
  def new
   	@admin = User.new
   	flash[:notice] = ""

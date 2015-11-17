@@ -52,14 +52,14 @@
   font-size: 12px;
   font-weight: 200;
   background-color: #2e353d;
-  padding-left: 0px;
+  padding-right: 0px;
   position: fixed;
   top: 50px;
   left: 0px;
   width: 200px;
   height: 100%;
   color: #e1ffff;
-  margin-right: 10px;
+  margin-right: 0px;
   float: left;
 }
 .nav-side-menu .brand {

@@ -1,44 +1,69 @@
-<div class="bs-example">
-  <% if current_user.is_admin %>
-    <%=link_to "Add Item",new_item_path,class: "btn btn-primary btn-sm"%>
-  <% end %>
-  <div class="container">
-    <div class="row">
-      <% @items.each do |item| %>
-        <% if current_user.is_admin %>
-          <div class="col-xs-3">
-            <div class="thumbnail">
-              <h3><%=item.name%></h3>
-              <% var_img = "item_images/#{item.image}" %>
-              <%= image_tag var_img, :height => '140px', :width => '185px' %><br />
-              <p><%=item.description%></p>
-              <a href="#"><i class="fa fa-inr"><%=item.price%></i></a><br />  
-              <div class = "buttons" >
-                <% if item.is_available%>
-                  <%=link_to "make it unavailable",unavailableitem_path(item.id),class: "btn-sm btn-danger"%>
-                <% else %>
-                  <%=link_to "make it available",unavailableitem_path(item.id),class: "btn-sm btn-danger"%>
-                <% end -%> 
-                <%=link_to "edit",edit_item_path(item),class: "btn-sm btn-primary"%>
-                <%= link_to 'Delete', item_path(item),method: :delete,data: { confirm: 'Are you sure? your admin' },class: "btn-sm btn-warning" %>
-              </div>
-            </div>
-          </div>
-        <% else %>
-          <% if item.is_available %>
-            <div class="col-xs-3">
-              <div class="thumbnail">
-                <h3><%=item.name%></h3>
+<div class="container item">
+  <div class="row">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">items   <a href="users/new"><i class="fa fa-plus-circle fa-lg"></i></a></h3>
+        <div class="pull-right">
+          <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+            <i class="fa fa-filter fa-lg"></i>
+          </span>
+        </div>
+      </div>
+      <div class="panel-body">
+        <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter items" />
+      </div>
+      <table class="table table-hover" id="dev-table">
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>About item</th>
+            <th>price</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%@items.each do |item| %>
+            <% if current_user %>
+              <% if current_user.is_admin %>
+                <tr>
+                  <% var_img = "item_images/#{item.image}" %>
+                  <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
+                  <td><strong><%=item.name%></strong><hr><%= item.description%></td>
+                  <td><i class = "fa fa-rupee"><%=item.price%></i></td>
+                  <td><%=link_to "edit",edit_item_path(item.id),class: "btn btn-sm btn-primary"%>
+                      <% if item.is_available %>
+                        <%=link_to "make it unavailable",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
+                      <% else %>
+                        <%=link_to "make it available",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
+                      <% end %>
+                       <%= link_to "delete",item_path(item.id),method: :delete,data: {confirm: 'Are you sure? your admin' },class: "btn btn-sm btn-danger" %>  
+                  </td>
+                </tr>
+              <% else %>
+                <tr>
+                  <% var_img = "item_images/#{item.image}" %>
+                  <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
+                  <td><strong><%=item.name%></strong><hr><%= item.description%></td>
+                  <td><i class = "fa fa-rupee"><%=item.price%></i></td>
+                  <td>
+                    <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
+                  </td>
+                </tr>
+              <% end %>    
+            <%elsif%>
+              <tr>
                 <% var_img = "item_images/#{item.image}" %>
-                <%= image_tag var_img, :height => '140px', :width => '185px' %><br />
-                <p><%=item.description%></p>
-                <a href="#"><i class="fa fa-inr"><%=item.price%></i></a><br /> 
-                <%=link_to "Add TO Cart","/#",class: "btn-sm btn-danger"%>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-      <%end%>    
-    </div>   
+                <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
+                <td><strong><%=item.name%></strong><hr><%= item.description%></td>
+                <td><i class = "fa fa-rupee"><%=item.price%></i></td>
+                <td>
+                  <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
+                </td>
+              </tr>
+            <%end%> 
+          <%end%>     
+        </tbody>
+      </table>
+    </div>  
   </div>
 </div>

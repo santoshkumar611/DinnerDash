@@ -1,15 +1,16 @@
-<div class = "container well " style = "width:500px">
- <% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
-  <% end %>
- <h2> admin registration page </h2>
- <%= form_for(@admin, url: admins_path) do |f| %>
- adminname: <%= f.text_field :full_name,placeholder: "enter user name",class: "form form-control",required: true%>
- displayname: <%= f.text_field :display_name,placeholder: "enter display name",class: "form form-control"%><span>optional</span><br>
- email: <%= f.email_field :email,placeholder: "enter email",class: "form form-control",required: true%>
- password: <%= f.password_field :password,placeholder: "enter password",class: "form form-control",required: true %>
- confirm password<%= f.password_field :password_confirmation,placeholder: "reenter password ",class: "form form-control",required: true %><br>
- image: <%= f.file_field :image%><br>
- <%=f.submit "register" %>
- <%end%>
-</div>
+
+	<div class = "container well " style = "width:500px">
+	 <% if flash[:notice] %>
+	    <div class="notice"><%= flash[:notice] %></div>
+	  <% end %>
+	 <h2> admin registration page </h2>
+	 <%= form_for(@admin, url: admins_path) do |f| %>
+	 adminname: <%= f.text_field :full_name,placeholder: "enter user name",class: "form form-control",required: true%>
+	 displayname: <%= f.text_field :display_name,placeholder: "enter display name",class: "form form-control"%><span>optional</span><br>
+	 email: <%= f.email_field :email,placeholder: "enter email",class: "form form-control",required: true%>
+	 password: <%= f.password_field :password,placeholder: "enter password",class: "form form-control",required: true %>
+	 confirm password<%= f.password_field :password_confirmation,placeholder: "reenter password ",class: "form form-control",required: true %><br>
+	 image: <%= f.file_field :image%><br>
+	 <%=f.submit "register" %>
+	 <%end%>
+	</div>

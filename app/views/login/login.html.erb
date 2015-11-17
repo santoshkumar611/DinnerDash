@@ -1,19 +1,25 @@
 <div class = "container login">
-    <% if flash[:notice] %>
-     <div class="notice"><%= flash[:notice] %></div>
-    <% end %>
-    <h4> login page </h4>
-    <%= form_tag(login_logincheck_path,class: "form-login") do %>
-     username or email:
-     <%= text_field_tag "username",nil,placeholder: "enter user name",class: "form form-control input-sm chat-input",required: true%><br>
-     password:
-     <%= password_field_tag "password",nil,placeholder: "enter user name",class: "form form-control input-sm chat-input",required: true%><br>
-     <div class='wrapper'>
-      <span class="group-btn">
-       <%= submit_tag "login",class: "btn btn-primary btn-md "%>
-      </span>
-     </div>
-    <%end-%>
+  <div class ="row">
+    <div class="col-md-offset-5 col-md-3">
+      <% if flash[:notice] %>
+        <div class="notice"><%= flash[:notice] %></div>
+      <% end %>
+      <div class = "form-login">
+        <%= form_tag(login_logincheck_path) do %>
+          <h4> login </h4>
+          <strong>username or email</strong>
+          <%= text_field_tag "username",nil,placeholder: "enter user name",class: "form form-control input-sm chat-input",required: true%><br>
+          <strong>password:</strong>
+          <%= password_field_tag "password",nil,placeholder: "enter password",class: "form form-control input-sm chat-input",required: true%><br>
+          <div class='wrapper'>
+            <span class="group-btn">
+              <%= submit_tag "login",class: "btn btn-primary btn "%>
+            </span>
+          </div>
+        <%end-%>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- <div class="container">
     <div class="row">

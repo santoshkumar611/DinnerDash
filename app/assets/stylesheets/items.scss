@@ -1,11 +1,48 @@
-// Place all the styles related to the items controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-/* for image */
-    .bs-example{
-      margin: 30px;
+.row{
+		    margin-top:40px;
+		    padding: 0 10px;
+		}
+		.item {
+			padding-bottom: 40px;
+		}
+		.clickable{
+		    cursor: pointer;   
+		}
+
+		.panel-heading div {
+			margin-top: -18px;
+			font-size: 15px;
+		}
+		.panel-heading div span{
+			margin-left:5px;
+		}
+		.panel-body{
+			display: none;
+		}
+		.registration {
+			margin-left: 100px;
+			padding: 20px;
+			width: 500px;
+		}
+		strong{
+			margin-left: 60px;
+			margin-top: 10px;
+			margin-bottom: 5px;
+		}
+		.form-control {
+			margin-left: 60px;
+			margin-top: 5px;
+			margin-bottom: 5px;
+			width: 250px;
+		}
+    td,th {
+    	border: solid 1px;
+    	border-color:  #81DAF5; 
     }
 
-.buttons {
-	padding: 10px;
-}
+		@media (max-width:1500px ){
+		 .user{
+	         width: 100%;
+	         position: relative;
+           } 	
+		}
