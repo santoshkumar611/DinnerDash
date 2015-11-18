@@ -1,9 +1,7 @@
 class ItemsController < ApplicationController
   before_action :auth_admin, only: [:new,:create,:edit,:update,:destroy,:unavailable]
 	def index
-		@items = Item.all
-    @count = 0
-    @styles = ["danger","primary","warning","success"]
+		@categories = Category.includes(:items).all
 	end
   def create
     

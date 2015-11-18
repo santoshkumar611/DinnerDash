@@ -5,6 +5,11 @@ class CategoriesController < ApplicationController
  def new
  	@category = Category.new
  end
+ 
+ def show
+  @category = Category.includes(:items).find(params[:id])
+ end
+
  def create 
  	@category = Category.new(name: params[:category][:name])
  	if @category.save

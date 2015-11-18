@@ -90,10 +90,12 @@
                     </li>
                   
                     <ul class="sub-menu collapse" id="products">
-                      <li class="active"><a href="#">starters</a></li>
-                      <li><a href="#">category1</a></li>
-                      <li><a href="#">category2</a></li>
-                      <li><a href="#">category3</a></li>
+                      <li class="active"><a href="/categories/<%=categories.first.id%>"><%=categories.first.name%></a></li>
+                      <% categories.each_with_index do |category,i| %>
+                        <% unless i==0 %>  
+                          <li><a href="/categories/<%=category.id%>"><%= category.name%></a></li>
+                        <%end%>
+                      <%end%>
                     </ul>
                   <%end%>
                 </ul>

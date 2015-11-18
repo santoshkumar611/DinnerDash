@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     get 'categories/new' => 'categories#new',as: :newcategory
     post 'categories/create' => 'categories#create',as: :categories
     get 'categories/destroy/:id'=> 'categories#destroy',as: :deletecategory
-
+    get 'categories/:id' => 'categories#show' , as: :show_category
   # routes for items controller
     resources :items
     get 'items/unavailable/:id'=> 'items#unavailable',as: :unavailableitem 

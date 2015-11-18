@@ -1,45 +1,63 @@
 <div class="container item">
   <div class="row">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h3 class="panel-title">items   <a href="users/new"><i class="fa fa-plus-circle fa-lg"></i></a></h3>
-        <div class="pull-right">
-          <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
-            <i class="fa fa-filter fa-lg"></i>
-          </span>
+    <% @categories.each do |category| %>
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title"> <%= category.name %> - items   
+            <% if current_user %> 
+              <% if current_user.is_admin %>  
+                <a href="items/new"><i class="fa fa-plus-circle fa-lg"></i></a>
+              <% end %>
+            <% end %>
+          </h3>
+          <div class="pull-right">
+            <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+              <i class="fa fa-filter fa-lg"></i>
+            </span>
+          </div>
         </div>
-      </div>
-      <div class="panel-body">
-        <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter items" />
-      </div>
-      <table class="table table-hover" id="dev-table">
-        <thead>
-          <tr>
-            <th>item</th>
-            <th>About item</th>
-            <th>price</th>
-            <th>action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%@items.each do |item| %>
-            <% if current_user %>
-              <% if current_user.is_admin %>
-                <tr>
-                  <% var_img = "item_images/#{item.image}" %>
-                  <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
-                  <td><strong><%=item.name%></strong><hr><%= item.description%></td>
-                  <td><i class = "fa fa-rupee"><%=item.price%></i></td>
-                  <td><%=link_to "edit",edit_item_path(item.id),class: "btn btn-sm btn-primary"%>
-                      <% if item.is_available %>
-                        <%=link_to "make it unavailable",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
-                      <% else %>
-                        <%=link_to "make it available",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
-                      <% end %>
-                       <%= link_to "delete",item_path(item.id),method: :delete,data: {confirm: 'Are you sure? your admin' },class: "btn btn-sm btn-danger" %>  
-                  </td>
-                </tr>
-              <% else %>
+        <div class="panel-body">
+          <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter items" />
+        </div>
+        <table class="table table-hover" id="dev-table">
+          <thead>
+            <tr>
+              <th>item</th>
+              <th>About item</th>
+              <th>price</th>
+              <th>action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% category.items.each do |item| %>
+              <% if current_user %>
+                <% if current_user.is_admin %>
+                  <tr>
+                    <% var_img = "item_images/#{item.image}" %>
+                    <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
+                    <td><strong><%=item.name%></strong><hr><%= item.description%></td>
+                    <td><i class = "fa fa-rupee"><%=item.price%></i></td>
+                    <td><%=link_to "edit",edit_item_path(item.id),class: "btn btn-sm btn-primary"%>
+                        <% if item.is_available %>
+                          <%=link_to "make it unavailable",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
+                        <% else %>
+                          <%=link_to "make it available",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
+                        <% end %>
+                         <%= link_to "delete",item_path(item.id),method: :delete,data: {confirm: 'Are you sure? your admin' },class: "btn btn-sm btn-danger" %>  
+                    </td>
+                  </tr>
+                <% else %>
+                  <tr>
+                    <% var_img = "item_images/#{item.image}" %>
+                    <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
+                    <td><strong><%=item.name%></strong><hr><%= item.description%></td>
+                    <td><i class = "fa fa-rupee"><%=item.price%></i></td>
+                    <td>
+                      <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
+                    </td>
+                  </tr>
+                <% end %>    
+              <%elsif%>
                 <tr>
                   <% var_img = "item_images/#{item.image}" %>
                   <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
@@ -49,21 +67,11 @@
                     <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
                   </td>
                 </tr>
-              <% end %>    
-            <%elsif%>
-              <tr>
-                <% var_img = "item_images/#{item.image}" %>
-                <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
-                <td><strong><%=item.name%></strong><hr><%= item.description%></td>
-                <td><i class = "fa fa-rupee"><%=item.price%></i></td>
-                <td>
-                  <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
-                </td>
-              </tr>
-            <%end%> 
-          <%end%>     
-        </tbody>
-      </table>
-    </div>  
+              <%end%> 
+            <%end%>     
+          </tbody>
+        </table>
+      </div> <hr> 
+    <%end%>
   </div>
 </div>
