@@ -24,6 +24,7 @@ gem 'material_design_lite-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem  'twitter-bootstrap-rails'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'
 gem 'morrisjs-rails'
 gem 'raphael-rails'
 gem 'execjs'
