@@ -1,77 +1,36 @@
 <div class="container item">
-  <div class="row">
-    <% @categories.each do |category| %>
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <h3 class="panel-title"> <%= category.name %> - items   
-            <% if current_user %> 
-              <% if current_user.is_admin %>  
-                <a href="items/new"><i class="fa fa-plus-circle fa-lg"></i></a>
-              <% end %>
-            <% end %>
-          </h3>
-          <div class="pull-right">
-            <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
-              <i class="fa fa-filter fa-lg"></i>
-            </span>
-          </div>
+    <div class="page-header">
+        <h1>Panels with nav tabs.<span class="pull-right label label-default">:)</span></h1>
+    </div>
+        <div class="col-md-6">
+            <div class="panel with-nav-tabs panel-primary">
+                <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1primary" data-toggle="tab">Primary 1</a></li>
+                            <li><a href="#tab2primary" data-toggle="tab">Primary 2</a></li>
+                            <li><a href="#tab3primary" data-toggle="tab">Primary 3</a></li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#tab4primary" data-toggle="tab">Primary 4</a></li>
+                                    <li><a href="#tab5primary" data-toggle="tab">Primary 5</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                </div>
+                <div class="panel-body">
+                    fjkdgbjkfdg
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1primary">Primary 1</div>
+                        <div class="tab-pane fade" id="tab2primary">Primary 2
+                          <p color= "blue">dkjsfjsdfjdsavdjsvjdasgvdgvad</p>
+                        </div>
+                        <div class="tab-pane fade" id="tab3primary">Primary 3</div>
+                        <div class="tab-pane fade" id="tab4primary">Primary 4</div>
+                        <div class="tab-pane fade" id="tab5primary">Primary 5</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-          <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter items" />
-        </div>
-        <table class="table table-hover" id="dev-table">
-          <thead>
-            <tr>
-              <th>item</th>
-              <th>About item</th>
-              <th>price</th>
-              <th>action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% category.items.each do |item| %>
-              <% if current_user %>
-                <% if current_user.is_admin %>
-                  <tr>
-                    <% var_img = "item_images/#{item.image}" %>
-                    <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
-                    <td><strong><%=item.name%></strong><hr><%= item.description%></td>
-                    <td><i class = "fa fa-rupee"><%=item.price%></i></td>
-                    <td><%=link_to "edit",edit_item_path(item.id),class: "btn btn-sm btn-primary"%>
-                        <% if item.is_available %>
-                          <%=link_to "make it unavailable",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
-                        <% else %>
-                          <%=link_to "make it available",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
-                        <% end %>
-                         <%= link_to "delete",item_path(item.id),method: :delete,data: {confirm: 'Are you sure? your admin' },class: "btn btn-sm btn-danger" %>  
-                    </td>
-                  </tr>
-                <% else %>
-                  <tr>
-                    <% var_img = "item_images/#{item.image}" %>
-                    <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
-                    <td><strong><%=item.name%></strong><hr><%= item.description%></td>
-                    <td><i class = "fa fa-rupee"><%=item.price%></i></td>
-                    <td>
-                      <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
-                    </td>
-                  </tr>
-                <% end %>    
-              <%elsif%>
-                <tr>
-                  <% var_img = "item_images/#{item.image}" %>
-                  <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
-                  <td><strong><%=item.name%></strong><hr><%= item.description%></td>
-                  <td><i class = "fa fa-rupee"><%=item.price%></i></td>
-                  <td>
-                    <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
-                  </td>
-                </tr>
-              <%end%> 
-            <%end%>     
-          </tbody>
-        </table>
-      </div> <hr> 
-    <%end%>
-  </div>
+    </div>
 </div>
