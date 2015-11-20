@@ -1,36 +1,218 @@
-<div class="container item">
-    <div class="page-header">
-        <h1>Panels with nav tabs.<span class="pull-right label label-default">:)</span></h1>
-    </div>
-        <div class="col-md-6">
-            <div class="panel with-nav-tabs panel-primary">
-                <div class="panel-heading">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab1primary" data-toggle="tab">Primary 1</a></li>
-                            <li><a href="#tab2primary" data-toggle="tab">Primary 2</a></li>
-                            <li><a href="#tab3primary" data-toggle="tab">Primary 3</a></li>
-                            <li class="dropdown">
-                                <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#tab4primary" data-toggle="tab">Primary 4</a></li>
-                                    <li><a href="#tab5primary" data-toggle="tab">Primary 5</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+<style type="text/css">
+  .tabbable-panel {
+    border:2px solid #337ab7 ;
+
+    padding: 10px;
+
+  }
+
+  /* Default mode */
+  .tabbable-line > .nav-tabs {
+    border: 0;
+    margin: 0px;
+  }
+  .tabbable-line > .nav-tabs > li {
+    margin-right: 2px;
+  }
+  .tabbable-line > .nav-tabs > li > a {
+    border: 0;
+    margin-right: 0;
+    color: #737373;
+  }
+  .tabbable-line > .nav-tabs > li > a > i {
+    color: #a6a6a6;
+  }
+  .tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
+    border-bottom: 4px solid #fbcdcf;
+  }
+  .tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
+    border: 0;
+    background: none !important;
+    color: #333333;
+  }
+  .tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
+    color: #a6a6a6;
+  }
+  .tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
+    margin-top: 0px;
+  }
+  .tabbable-line > .nav-tabs > li.active {
+    border-bottom: 4px solid #f3565d;
+    position: relative;
+  }
+  .tabbable-line > .nav-tabs > li.active > a {
+    border: 0;
+    color: #337ab7;
+  }
+  .tabbable-line > .nav-tabs > li.active > a > i {
+    color: #337ab7;
+  }
+  .tabbable-line > .tab-content {
+    margin-top: -3px;
+    background-color: #fff;
+    border: 0;
+    border-top: 1px solid #eee;
+    padding: 15px 0;
+  }
+  .portlet .tabbable-line > .tab-content {
+    padding-bottom: 0;
+  }
+  @media (max-width: 1500px) {
+    .item_index {
+      width: 1000px;
+
+      top : 50px;
+    }
+  }
+  
+</style>
+
+<div class="container item_index">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Items 
+        <% if current_user %> 
+        <% if current_user.is_admin %>  
+        <a href="items/new" class="pull-right"><button class = "btn btn-primary">ADD<i class="fa fa-plus-circle fa-lg"></i></button></a>
+        <% end %>
+        <% end %>
+      </h3>
+      <div class="tabbable-panel">
+        <div class="tabbable-line">
+          <ul class="nav nav-tabs item_nav">
+            <% @categories.each_with_index do |category,i| %>
+              <% if i == 0 %>
+                <li class="active">
+                  <a href = "#tab_default_<%=category.id%>" data-toggle="tab">
+                    <%=category.name%>
+                  </a>
+                </li>
+              <% else %>
+                <li>
+                  <a href = "#tab_default_<%=category.id%>" data-toggle="tab">
+                    <%=category.name%>
+                  </a>
+                </li>
+              <% end %>    
+            <% end %>
+          </ul>
+          <div class="tab-content">
+            <% @categories.each_with_index do |category,i| %>
+              <% if i == 0 %>
+                <div class="tab-pane active fade in" id="tab_default_<%=category.id%>">
+                  <table class="table table-hover" id="dev-table">
+                    <thead>
+                      <tr>
+                        <th>item</th>
+                        <th>About item</th>
+                        <th>price</th>
+                        <th>action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% category.items.each do |item| %>
+                        <% if current_user %>
+                          <% if current_user.is_admin %>
+                            <tr>
+                              <% var_img = "item_images/#{item.image}" %>
+                              <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
+                              <td><strong><%=item.name%></strong><hr><%= item.description%></td>
+                              <td><i class = "fa fa-rupee"><%=item.price%></i></td>
+                              <td><%=link_to "edit",edit_item_path(item.id),class: "btn btn-sm btn-primary"%>
+                                <% if item.is_available %>
+                                <%=link_to "make it unavailable",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
+                                <% else %>
+                                <%=link_to "make it available",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
+                                <% end %>
+                                <%= link_to "delete",item_path(item.id),method: :delete,data: {confirm: 'Are you sure? your admin' },class: "btn btn-sm btn-danger" %>  
+                              </td>
+                            </tr>
+                          <% else %>
+                            <tr>
+                              <% var_img = "item_images/#{item.image}" %>
+                              <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
+                              <td><strong><%=item.name%></strong><hr><%= item.description%></td>
+                              <td><i class = "fa fa-rupee"><%=item.price%></i></td>
+                              <td>
+                                <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
+                              </td>
+                            </tr>
+                          <% end %>    
+                        <%elsif%>
+                          <tr>
+                            <% var_img = "item_images/#{item.image}" %>
+                            <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
+                            <td><strong><%=item.name%></strong><hr><%= item.description%></td>
+                            <td><i class = "fa fa-rupee"><%=item.price%></i></td>
+                            <td>
+                              <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
+                            </td>
+                          </tr>
+                        <%end%> 
+                      <%end%>     
+                    </tbody>
+                  </table>
+                </div> <hr> 
+              <% else %>    
+                <div class="tab-pane fade" id="tab_default_<%=category.id%>">
+                  <table class="table table-hover" id="dev-table">
+                    <thead>
+                      <tr>
+                        <th>item</th>
+                        <th>About item</th>
+                        <th>price</th>
+                        <th>action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% category.items.each do |item| %>
+                        <% if current_user %>
+                          <% if current_user.is_admin %>
+                            <tr>
+                              <% var_img = "item_images/#{item.image}" %>
+                              <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
+                              <td><strong><%=item.name%></strong><hr><%= item.description%></td>
+                              <td><i class = "fa fa-rupee"><%=item.price%></i></td>
+                              <td><%=link_to "edit",edit_item_path(item.id),class: "btn btn-sm btn-primary"%>
+                                <% if item.is_available %>
+                                <%=link_to "make it unavailable",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
+                                <% else %>
+                                <%=link_to "make it available",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
+                                <% end %>
+                                <%= link_to "delete",item_path(item.id),method: :delete,data: {confirm: 'Are you sure? your admin' },class: "btn btn-sm btn-danger" %>  
+                              </td>
+                            </tr>
+                          <% else %>
+                            <tr>
+                              <% var_img = "item_images/#{item.image}" %>
+                              <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
+                              <td><strong><%=item.name%></strong><hr><%= item.description%></td>
+                              <td><i class = "fa fa-rupee"><%=item.price%></i></td>
+                              <td>
+                                <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
+                              </td>
+                            </tr>
+                          <% end %>    
+                        <%elsif%>
+                          <tr>
+                            <% var_img = "item_images/#{item.image}" %>
+                            <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
+                            <td><strong><%=item.name%></strong><hr><%= item.description%></td>
+                            <td><i class = "fa fa-rupee"><%=item.price%></i></td>
+                            <td>
+                              <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
+                            </td>
+                          </tr>
+                        <%end%> 
+                      <%end%>     
+                    </tbody>
+                  </table>
                 </div>
-                <div class="panel-body">
-                    fjkdgbjkfdg
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab1primary">Primary 1</div>
-                        <div class="tab-pane fade" id="tab2primary">Primary 2
-                          <p color= "blue">dkjsfjsdfjdsavdjsvjdasgvdgvad</p>
-                        </div>
-                        <div class="tab-pane fade" id="tab3primary">Primary 3</div>
-                        <div class="tab-pane fade" id="tab4primary">Primary 4</div>
-                        <div class="tab-pane fade" id="tab5primary">Primary 5</div>
-                    </div>
-                </div>
-            </div>
+              <% end %>
+            <% end %>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+</div>  
