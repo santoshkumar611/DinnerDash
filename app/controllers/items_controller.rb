@@ -2,7 +2,6 @@ class ItemsController < ApplicationController
   before_action :auth_admin, only: [:new,:create,:edit,:update,:destroy,:unavailable]
 	def index
 		@categories = Category.includes(:items).all
-    
 	end
   def create
     
@@ -48,14 +47,12 @@ class ItemsController < ApplicationController
 
   end
   def unavailable
-
-    item = Item.find(params[:id])
-    if item .is_available
-      item.update(is_available: false)
+    @item = Item.find(params[:id])
+    if @item .is_available
+      @item.update(is_available: false)
     else
-     item.update(is_available: true) 
+     @item.update(is_available: true) 
     end
-    redirect_to items_path
   end
   def new
     @item = Item.new

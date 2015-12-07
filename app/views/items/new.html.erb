@@ -1,14 +1,60 @@
-<div class = "container well" style = "width:500px">
-<% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
-  <% end %>
-  <h2> create new item </h2>
- <%= form_for @item do |f| %>
-  item name:  <%= f.text_field "name",placeholder: "enter item name",class: "form form-control",required: true%><br>
-  item description: <%= f.text_area "description",placeholder: "enter about item",class: "form form-control",required: true%><br>
-  item price:<%= f.number_field "price",placeholder: "enter price ",class: "form form-control",required: true%><br>
-  select category: <%= f.collection_select "category_id",Category.all, :id,:name%><br>
-  picture: <%= f.file_field "image" %><br>
-  <%= f.submit "add item",class: "btn btn-success"%><br>
- <%end%>
+
+<div class="container">
+	<div class="row">
+		<%= form_for @item , :html => {class: 'form-horizental'} do |f| %>
+		<fieldset>
+			<!-- Form Name -->
+			<legend>::: Item Creation</legend>
+			<!-- Text input-->
+			<div class="control-group">
+				<label class="control-label" for="full_name">Item Name</label>
+				<div class="controls">
+					<%= f.text_field "name",placeholder: "enter item name",class: "form form-control",required: true%><br>
+				</div>
+			</div>
+
+			<!-- Text input-->
+			<div class="control-group">
+				<label class="control-label" for="father_name">Description</label>
+				<div class="controls">
+					<%= f.text_area "description",placeholder: "enter about item",class: "form form-control",required: true%><br>
+				</div>
+			</div>
+
+			<!-- Text input-->
+			<div class="control-group">
+				<label class="control-label" for="mother_name">Price</label>
+				<div class="controls">
+					<%= f.number_field "price",placeholder: "enter price ",class: "form form-control",required: true%><br>
+				</div>
+			</div>
+
+			<!-- Text input-->
+			<div class="control-group">
+				<label class="control-label" for="email">category</label>
+				<div class="controls">
+					<%= f.collection_select "category_id",Category.all, :id,:name%><br>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="photo">Photo</label>
+				<div class="controls">
+					<%= f.file_field "image" %><br>
+				</div>
+			</div>
+
+			<!-- Button -->
+			<div class="control-group">
+				<label class="control-label" for="submit"></label>
+				<div class="controls">
+					<%= f.submit "add item",class: "btn btn-success"%><br>
+				</div>
+			</div>
+			</fieldset>
+			<%end%>
+
+		
+
+	</div>
 </div>

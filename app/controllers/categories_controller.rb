@@ -15,8 +15,8 @@ class CategoriesController < ApplicationController
  	if @category.save
  		redirect_to allcategories_path
  	else
- 		flash[:notice] = @category.errors.messages
- 	 render "new"
+ 		@categories = Category.all
+ 	 render "index"
  	end	
  end
  def destroy

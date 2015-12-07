@@ -3,8 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
    helper_method :current_user , :categories
-  def auth_admin
-  
+  def auth_admin 
    redirect_to root_path if current_user.is_admin == false
   end
   def current_user
@@ -12,5 +11,14 @@ class ApplicationController < ActionController::Base
   end
   def categories
     @categories = Category.all
+  end
+  def current_order
+     if current_user.is_admin == false
+      if !session[:order_id].nil?
+        Order.find(session[:order_id])
+      else
+        Order.new
+      end
+     end
   end
 end

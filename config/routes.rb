@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     resources :items
     get 'items/unavailable/:id'=> 'items#unavailable',as: :unavailableitem 
     
+
+    get 'orders/:id/create_order' => 'orders#create_order',as: :create_order
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,4 @@
+<%= form_for @category do |f| %>
+  category name<%= f.text_field :name,placeholder:"enter category name",class: "form form-control" %>
+  <%= f.submit "add category",class: "btn btn-success btn-sm" %>
+<%end%>

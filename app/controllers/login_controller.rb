@@ -1,7 +1,7 @@
 class LoginController < ApplicationController
   def login
    session[:user_id] = nil
-  end 
+  end
  def logincheck
    user = User.find_by_email(params[:username]) 
    unless user

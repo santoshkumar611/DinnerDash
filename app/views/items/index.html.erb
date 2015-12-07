@@ -120,9 +120,9 @@
                               <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                               <td><%=link_to "edit",edit_item_path(item.id),class: "btn btn-sm btn-primary"%>
                                 <% if item.is_available %>
-                                <%=link_to "make it unavailable",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
+                                <div class="un"><%=link_to "make it unavailable",unavailableitem_path(item.id),class: "btn btn-sm btn-info", remote: true%></div>
                                 <% else %>
-                                <%=link_to "make it available",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
+                                <div class="un"><%=link_to "make it available",unavailableitem_path(item.id),class: "btn btn-sm btn-info",remote: true%></div>
                                 <% end %>
                                 <%= link_to "delete",item_path(item.id),method: :delete,data: {confirm: 'Are you sure? your admin' },class: "btn btn-sm btn-danger" %>  
                               </td>
@@ -134,7 +134,7 @@
                               <td><strong><%=item.name%></strong><hr><%= item.description%></td>
                               <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                               <td>
-                                <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
+                                <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success"%>
                               </td>
                             </tr>
                           <% end %>    
@@ -145,7 +145,7 @@
                             <td><strong><%=item.name%></strong><hr><%= item.description%></td>
                             <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                             <td>
-                              <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
+                              <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success"%>
                             </td>
                           </tr>
                         <%end%> 
@@ -175,11 +175,11 @@
                               <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                               <td><%=link_to "edit",edit_item_path(item.id),class: "btn btn-sm btn-primary"%>
                                 <% if item.is_available %>
-                                <%=link_to "make it unavailable",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
+                                <div class="un"><%=link_to "make it unavailable",unavailableitem_path(item.id),class: "btn btn-sm btn-info", remote: true%></div>
                                 <% else %>
-                                <%=link_to "make it available",unavailableitem_path(item.id),class: "btn btn-sm btn-info"%>
+                                <div class="un"><%=link_to "make it available",unavailableitem_path(item.id),class: "btn btn-sm btn-info",remote: true%></div>
                                 <% end %>
-                                <%= link_to "delete",item_path(item.id),method: :delete,data: {confirm: 'Are you sure? your admin' },class: "btn btn-sm btn-danger" %>  
+                                <%= link_to "delete",item_path(item.id),method: :delete,data: {confirm: 'Are you sure? your admin' },class: "btn btn-sm btn-danger" %>
                               </td>
                             </tr>
                           <% else %>
@@ -189,7 +189,7 @@
                               <td><strong><%=item.name%></strong><hr><%= item.description%></td>
                               <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                               <td>
-                                <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
+                                <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success"%>
                               </td>
                             </tr>
                           <% end %>    
@@ -200,7 +200,7 @@
                             <td><strong><%=item.name%></strong><hr><%= item.description%></td>
                             <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                             <td>
-                              <%=link_to "Add To Cart","#",class: "btn btn-sm btn-success"%>
+                              <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success"%>
                             </td>
                           </tr>
                         <%end%> 
