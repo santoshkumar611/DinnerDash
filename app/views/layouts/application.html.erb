@@ -44,12 +44,12 @@
             <li><a href="/items">manege items</a></li>
           <% else %>
             <li><a href="/items">items</a></li>
-            
+            <li><a href="/orders/order_items_index">cart<span class="badge"><%= current_order_items %></span></a></li>
          <% end %>  
         <%end%> 
         <%if !current_user %>
          <li><a href="/items">items</a></li>
-         <li><a href="#">cart<span class="badge">0</span></a></li>
+         <li><a href="/orders/order_items_index">cart<span class="badge"><%= current_order_items %></span></a></li>
         <% end %> 
           
       </div><!-- /.navbar-collapse -->
