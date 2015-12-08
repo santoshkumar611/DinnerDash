@@ -134,7 +134,7 @@
                               <td><strong><%=item.name%></strong><hr><%= item.description%></td>
                               <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                               <td>
-                                <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success"%>
+                                <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success",remote: true%>
                               </td>
                             </tr>
                           <% end %>    
@@ -145,7 +145,7 @@
                             <td><strong><%=item.name%></strong><hr><%= item.description%></td>
                             <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                             <td>
-                              <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success"%>
+                              <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success",remote: true%>
                             </td>
                           </tr>
                         <%end%> 
@@ -189,7 +189,7 @@
                               <td><strong><%=item.name%></strong><hr><%= item.description%></td>
                               <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                               <td>
-                                <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success"%>
+                                <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success",remote: true%>
                               </td>
                             </tr>
                           <% end %>    
@@ -200,7 +200,7 @@
                             <td><strong><%=item.name%></strong><hr><%= item.description%></td>
                             <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                             <td>
-                              <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success"%>
+                              <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success",remote: true%>
                             </td>
                           </tr>
                         <%end%> 

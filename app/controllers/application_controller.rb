@@ -13,12 +13,12 @@ class ApplicationController < ActionController::Base
     @categories = Category.all
   end
   def current_order
-     if current_user.is_admin == false
+     
       if !session[:order_id].nil?
         Order.find(session[:order_id])
       else
         Order.new
       end
-     end
+
   end
 end
