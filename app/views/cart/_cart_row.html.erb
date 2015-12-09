@@ -1,0 +1,26 @@
+<tr>
+  <td>
+    <div class="media-body">
+      <h6 class="media-heading"><a href="#"><%=item_order.item.name%></a></h6>
+    </div>
+  </td>
+  <td class="col-sm-1 col-md-1" style="text-align: center">
+    <%= form_for item_order, remote: true do |f| %>
+    <div class="input-group">
+      <%= f.number_field :quantity ,min: 1%>
+      <div class="input-group-btn">
+
+        <%= f.submit "update", class: "btn btn-primary btn-sm" %>
+      </div>
+    </div>
+    <% end %>
+  </td>
+  <td class="col-sm-1 col-md-1 text-center"><strong><%=item_order.item.price%></strong></td>
+  <td class="col-sm-1 col-md-1 text-center"><strong id="<%=item_order.id%>"><%=item_order.item.price%></strong></td>
+  <td class="col-sm-1 col-md-1">
+    <button type="button" class="btn btn-danger btn-sm">
+    <span class="fa fa-times"></span> <%= link_to "Delete", item_order, { data: { confirm: "Are you sure you wish to delete the product '#{item_order.item.name}' from your cart?" }, method: :delete, remote: true, class: "btn btn-danger btn-sm" } %>
+    </button></td>
+  </tr>
+
+  

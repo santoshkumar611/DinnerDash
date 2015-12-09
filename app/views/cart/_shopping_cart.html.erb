@@ -1,0 +1,48 @@
+<style type="text/css">
+  table {
+    border: 1px solid;
+    border-color: #000;
+  }
+</style>
+<% if @item_orders.size == 0 %>
+  <p class="text-center">
+    There are no items in your shopping cart.  Please <%= link_to "go back", root_path %> and add some items to your cart.
+  </p>
+<% else %>  
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-10 col-md-offset-1">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Total</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+         <% @item_orders.each do |item_order| %>
+         <%= render 'cart/cart_row', item: item_order.item, item_order: item_order, show_total: true %>
+         <% end %> 
+         <tr>
+          <td>   </td>
+          <td>   </td>
+          <td>   </td>
+          <td>
+            <button type="button" class="btn btn-default">
+              <span class="fa fa-shopping-cart"></span> Continue Shopping
+            </button></td>
+            <td>
+              <button type="button" class="btn btn-success">
+                Checkout <span class="fa fa-play"></span>
+              </button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>
+

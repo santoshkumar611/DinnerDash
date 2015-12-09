@@ -134,7 +134,16 @@
                               <td><strong><%=item.name%></strong><hr><%= item.description%></td>
                               <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                               <td>
-                                <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success",remote: true%>
+                                <%= form_for @item_order, remote: true do |f| %>
+                                  <div class="input-group">
+                                    <div class="input-group-btn">
+                                      <%= f.hidden_field :item_id, value: item.id %>
+                                      <%= f.hidden_field :quantity, value: 1%>
+                                      <%= f.hidden_field :price, value: item.price %>
+                                      <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+                                    </div>
+                                  </div>
+                                <% end %>
                               </td>
                             </tr>
                           <% end %>    
@@ -145,7 +154,16 @@
                             <td><strong><%=item.name%></strong><hr><%= item.description%></td>
                             <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                             <td>
-                              <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success",remote: true%>
+                              <%= form_for @item_order, remote: true do |f| %>
+                                  <div class="input-group">
+                                    <div class="input-group-btn">
+                                      <%= f.hidden_field :item_id, value: item.id %>
+                                      <%= f.hidden_field :price, value: item.price %>
+                                      <%= f.hidden_field :quantity, value: 1%>
+                                      <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+                                    </div>
+                                  </div>
+                                <% end %>
                             </td>
                           </tr>
                         <%end%> 
@@ -189,18 +207,36 @@
                               <td><strong><%=item.name%></strong><hr><%= item.description%></td>
                               <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                               <td>
-                                <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success",remote: true%>
+                                <%= form_for @item_order, remote: true do |f| %>
+                                  <div class="input-group">
+                                    <div class="input-group-btn">
+                                      <%= f.hidden_field :item_id, value: item.id %>
+                                      <%= f.hidden_field :quantity, value: 1%>
+                                      <%= f.hidden_field :price, value: item.price %>
+                                      <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+                                    </div>
+                                  </div>
+                                <% end %>
                               </td>
                             </tr>
                           <% end %>    
-                        <%elsif%>
+                        <%else%>
                           <tr>
                             <% var_img = "item_images/#{item.image}" %>
                             <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
                             <td><strong><%=item.name%></strong><hr><%= item.description%></td>
                             <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                             <td>
-                              <%=link_to "Add To Cart",create_order_path(item.id),class: "btn btn-sm btn-success",remote: true%>
+                              <%= form_for @item_order, remote: true do |f| %>
+                                  <div class="input-group">
+                                    <div class="input-group-btn">
+                                      <%= f.hidden_field :item_id, value: item.id %>
+                                      <%= f.hidden_field :quantity, value: 1%>
+                                      <%= f.hidden_field :price, value: item.price %>
+                                      <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+                                    </div>
+                                  </div>
+                                <% end %>
                             </td>
                           </tr>
                         <%end%> 

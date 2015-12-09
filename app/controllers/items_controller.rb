@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :auth_admin, only: [:new,:create,:edit,:update,:destroy,:unavailable]
 	def index
 		@categories = Category.includes(:items).all
+    @item_order = current_order.item_orders.new if !admin
 	end
   def create
     

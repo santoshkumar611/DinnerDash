@@ -6,6 +6,13 @@ class ApplicationController < ActionController::Base
   def auth_admin 
    redirect_to root_path if current_user.is_admin == false
   end
+  def admin
+    if current_user
+      current_user.is_admin == true
+    else
+      false
+    end
+  end
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
