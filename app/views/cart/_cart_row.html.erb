@@ -7,6 +7,7 @@
   <td class="col-sm-1 col-md-1" style="text-align: center">
     <%= form_for item_order, remote: true do |f| %>
     <div class="input-group">
+      <%= f.hidden_field :item_id, value: item_order.item.id %>
       <%= f.number_field :quantity ,min: 1%>
       <div class="input-group-btn">
 
@@ -16,11 +17,10 @@
     <% end %>
   </td>
   <td class="col-sm-1 col-md-1 text-center"><strong><%=item_order.item.price%></strong></td>
-  <td class="col-sm-1 col-md-1 text-center"><strong id="<%=item_order.id%>"><%=item_order.item.price%></strong></td>
-  <td class="col-sm-1 col-md-1">
-    <button type="button" class="btn btn-danger btn-sm">
-    <span class="fa fa-times"></span> <%= link_to "Delete", item_order, { data: { confirm: "Are you sure you wish to delete the product '#{item_order.item.name}' from your cart?" }, method: :delete, remote: true, class: "btn btn-danger btn-sm" } %>
-    </button></td>
+  <td class="col-sm-1 col-md-1 text-center"><strong id="<%=item_order.id%>"><%=item_order.price%></strong></td>
+  <td class="col-sm-1 col-md-1"> 
+   </span> <%= link_to "Delete", item_order, { data: { confirm: "Are you sure you wish to delete the product '#{item_order.item.name}' from your cart?" }, method: :delete, remote: true,class: " fa fa-times btn btn-danger btn-sm" } %>
+    </td>
   </tr>
 
   

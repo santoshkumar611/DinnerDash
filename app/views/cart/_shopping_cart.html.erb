@@ -5,7 +5,7 @@
   }
 </style>
 <% if @item_orders.size == 0 %>
-  <p class="text-center">
+  <p class="text-center" style = "margin-top: 200px">
     There are no items in your shopping cart.  Please <%= link_to "go back", root_path %> and add some items to your cart.
   </p>
 <% else %>  
@@ -25,17 +25,26 @@
         <tbody>
          <% @item_orders.each do |item_order| %>
          <%= render 'cart/cart_row', item: item_order.item, item_order: item_order, show_total: true %>
-         <% end %> 
+         <% end %>
+         <tr>
+          <td>   </td>
+          <td>   </td>
+          
+          <td><h6>Total</h6></td>
+          <td class="text-right"><h6><strong class = "total"><%= @sum %></strong></h6></td>
+          <td>   </td>
+        </tr>
+
          <tr>
           <td>   </td>
           <td>   </td>
           <td>   </td>
           <td>
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" onclick="window.location='/items'">
               <span class="fa fa-shopping-cart"></span> Continue Shopping
             </button></td>
             <td>
-              <button type="button" class="btn btn-success">
+              <button type="button" class="btn btn-success" onclick="window.location='/cart/clear_cart'">
                 Checkout <span class="fa fa-play"></span>
               </button></td>
             </tr>
