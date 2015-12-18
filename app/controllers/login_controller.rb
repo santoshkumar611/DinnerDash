@@ -1,6 +1,7 @@
 class LoginController < ApplicationController
   def login
-   session[:user_id] = nil
+     for_flash
+     session[:user_id] = nil
   end
  def logincheck
    user = User.find_by_email(params[:username]) 
@@ -9,19 +10,29 @@ class LoginController < ApplicationController
    end 
    if user && user.authenticate(params[:password])
      session[:user_id] = user.id
-     flash[:notice] = "login success retry"
      if user.is_admin
       redirect_to items_path # need to modify
      else
-      redirect_to items_path
+      if flash[:notice]
+       redirect_to cart_path
+      else
+       redirect_to items_path
+      end
      end
    else 
-   	flash[:notice] = "login failed retry"
+    for_flash
    	render "login"
    end
   end 
   def logout
+    session[:order_id] = nil
     session[:user_id] = nil
     redirect_to root_path
   end
+  private 
+   def for_flash
+    if flash[:notice]
+     flash[:notice] = "login" 
+    end 
+   end
 end

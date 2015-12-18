@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # routes for login controller
-   root 'login#login'
-   get 'login/login' =>'login#login'
+   root 'items#index'
+   get 'login/login' =>'login#login',as: :login_page
    post 'login/logincheck' => 'login#logincheck' ,as: :login_logincheck
     get 'login/logout' => 'login#logout',as: :signout
    # routes for users controller 
