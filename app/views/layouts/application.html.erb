@@ -88,20 +88,6 @@
                      </a>
                     </li>
                   <%end%> 
-                  <% if !current_user %> 
-                    <li data-toggle="collapse" data-target="#products" class="collapsed active">
-                        <a href="#"><i class="fa fa-gift fa-lg"></i> Menu <span class="arrow"></span></a>
-                    </li>
-                  
-                    <ul class="sub-menu collapse" id="products">
-                      <li class="active"><a href="/categories/<%=categories.first.id%>"><%=categories.first.name%></a></li>
-                      <% categories.each_with_index do |category,i| %>
-                        <% unless i==0 %>  
-                          <li><a href="/categories/<%=category.id%>"><%= category.name%></a></li>
-                        <%end%>
-                      <%end%>
-                    </ul>
-                  <%end%>
                 </ul>
          </div>
   </div>      

@@ -29,7 +29,13 @@
    				<strong>confirm password:</strong>
    				<div class="form-group">
    					<%= f.password_field :password_confirmation,placeholder: "reenter password ",class: "form form-control",required: true %>
-   				</div>	
+   				</div>
+          <% if current_user&&current_user.is_admin%>
+            <strong>Make Admin</strong>
+            <div class="form-group">
+              <%=f.check_box :is_admin,style: "margin-left: 80px"%>
+            </div>
+          <% end %>	
    				<strong>image:</strong> 
    				 <%= f.file_field :image,class: "form-control input-sm"%><br>
    				<%=f.submit "register" ,class: "btn btn-success btn-block"%><br>

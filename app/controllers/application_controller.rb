@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
    helper_method :current_user , :categories , :current_order_items
   def auth_admin 
    if current_user
-    redirect_to root_path if current_user.is_admin == flase
+    redirect_to root_path if current_user.is_admin == false
    else 
     redirect_to root_path
    end
