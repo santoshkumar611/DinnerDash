@@ -14,7 +14,7 @@ class LoginController < ApplicationController
       redirect_to items_path # need to modify
      else
       if flash[:notice]
-       redirect_to cart_path
+       redirect_to new_transaction_path
       else
        redirect_to items_path
       end

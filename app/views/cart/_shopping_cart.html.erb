@@ -44,9 +44,7 @@
               <span class="fa fa-shopping-cart"></span> Continue Shopping
             </button></td>
             <td>
-              <button type="button" class="btn btn-success" onclick="window.location='/cart/clear_cart'">
-                Checkout <span class="fa fa-play"></span>
-              </button></td>
+              <%=link_to "Checkout", new_transaction_path, class: "btn btn-success fa fa-play"%></td>
             </tr>
           </tbody>
         </table>

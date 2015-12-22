@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
  validates :full_name, :email,presence: true
  validates :email, uniqueness: true
  has_many :orders,dependent: :destroy
+ has_many :missed_orders
+ def has_payment_info?
+  self.braintree_customer_id
+ end
 end

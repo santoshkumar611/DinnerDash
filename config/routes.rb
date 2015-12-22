@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'transactions/new'
+
   # routes for login controller
    root 'items#index'
    get 'login/login' =>'login#login',as: :login_page
@@ -26,7 +28,8 @@ Rails.application.routes.draw do
       
     resources :item_orders
     get 'cart/index' => "cart#index", as: :cart
-    get 'cart/clear_cart' => "cart#clear_cart"
+    get 'cart/clear_cart' => "cart#clear_cart",as: :clear_cart
+    resources :transactions ,only: [:new,:create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

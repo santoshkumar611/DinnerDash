@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
    helper_method :current_user , :categories , :current_order_items
   def auth_admin 
-   redirect_to root_path if current_user.is_admin == false
+   if current_user
+    redirect_to root_path if current_user.is_admin == flase
+   else 
+    redirect_to root_path
+   end
   end
   def admin
     if current_user
@@ -23,7 +27,7 @@ class ApplicationController < ActionController::Base
     if !session[:order_id].nil?
       Order.find(session[:order_id])
     else
-      Order.new
+      Order.new(status_id: 1)
     end
   end
   def current_order_items
