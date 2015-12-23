@@ -134,16 +134,7 @@
                               <td><strong><%=item.name%></strong><hr><%= item.description%></td>
                               <td><i class = "fa fa-rupee"><%=item.price%></i></td>
                               <td>
-                                <%= form_for @item_order, remote: true do |f| %>
-                                  <div class="input-group">
-                                    <div class="input-group-btn">
-                                      <%= f.hidden_field :item_id, value: item.id %>
-                                      <%= f.hidden_field :quantity, value: 1%>
-                                      <%= f.hidden_field :price, value: item.price %>
-                                      <%= f.submit "Add to Cart", class: "btn btn-primary" %>
-                                    </div>
-                                  </div>
-                                <% end %>
+                                <%= render "add_to_cart_form" %>
                               </td>
                             </tr>
                           <% end %>    

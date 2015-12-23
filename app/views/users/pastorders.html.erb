@@ -1,0 +1,50 @@
+<style type="text/css">
+  table {
+    border: 1px solid;
+    border-color: #000;
+  }
+  td{
+  	text-decoration: none;
+  }
+</style>
+<div class="container" >
+	<% if @pastorders == nil %>
+	<div class="alert alert-info" style = "margin-top: 200px">
+		<a href="/items" class="btn btn-xs btn-primary pull-right">place an order</a>
+		<strong>message:</strong> you have not placed any orders yet
+	</div>
+	<% else %>
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th class="text-center">order-id:</th>
+							<th class="text-center">items</th>
+							<th class="text-center">Price</th>
+							<th class="text-center">Placed-at:</th>
+							<th class="text-center">Staus</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @pastorders.each do |order|%>
+							<tr>
+								<td class="text-center"><%=order.id%></td>
+								<td class="text-center">
+								 	<ul class = "list-unstyled">
+										<%order.items.each do |item| %>
+			                <li><a href = "/items/<%=item.id%>"><%=item.name%></a></li>
+			              <% end -%>
+			            </ul>
+								</td>
+								<td class="text-center"><i class="fa fa-inr"></i><%=order.total_cost%></td>
+								<td class="text-center"><%=order.updated_at.in_time_zone("New Delhi").strftime("%I:%M %p %^b %Y")%></td>
+							  <td class="text-center"><%=order.status.name%></td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	<% end %>
+</div>

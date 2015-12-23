@@ -59,6 +59,10 @@ class ItemsController < ApplicationController
     @item = Item.new
     @categories = Category.all
   end
+  def show
+    @item = Item.find(params[:id])
+    @item_order = current_order.item_orders.new if !admin
+  end
   def edit
     @item = Item.find(params[:id])
   end

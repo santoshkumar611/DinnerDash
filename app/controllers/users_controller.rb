@@ -47,7 +47,9 @@ class UsersController < ApplicationController
      	flash[:notice] = @user.errors.messages
       render "new"
     end	
-
+  end
+  def pastorders
+    @pastorders = current_user.orders.includes(:items).where.not(items: {id: nil}).order(:id)
   end
   private
   def user_details

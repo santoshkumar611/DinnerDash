@@ -51,7 +51,7 @@ class TransactionsController < ApplicationController
 			end
 		end
 		def sum
-			@sum = ItemOrder.find_by_sql(
-				"SELECT SUM(price) AS price FROM item_orders where item_orders.order_id = #{current_order.id}")[0].price
+			@sum = ItemOrder.find_by_sql("
+				SELECT SUM(price) AS price FROM item_orders where item_orders.order_id = #{current_order.id}")[0].price
 		end
 	end
