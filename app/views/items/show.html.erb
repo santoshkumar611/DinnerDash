@@ -6,7 +6,6 @@
     "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
     font-weight: 300;
 }
-
 .coupon #head {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -96,27 +95,28 @@ sup {
 				</div>
 			</div>
 			<div class="panel-body">
-				<img src="/public/images/item_images/<%=@item.image%>" class="coupon-img img-rounded">
-				<div class="col-md-3">
-					<div class="offer">
-						<span class="fa fa-inr"><%=@item.price%></span>
-					</div>
-				</div>
-				<div class="col-md-12">
-				<p class="disclosure">
-					<%=@item.description%>
-				</p>
-					</div>
-				</div>
-				<div class="panel-footer">
-					<div class="coupon-code">
-						<%= render "add_to_cart_form" %>
-						<span class="print">
-							<a href="#" class="btn btn-link"><i class="fa fa-lg fa-print"></i> Print Coupon</a>
-						</span>
-					</div>
-					<div class="exp">Expires: Sep 30, 2016</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        <% var_img = "item_images/#{@item.image}" %>
+        <%= image_tag var_img,:height => '140px', :width => '185px', class: "coupon-img img-rounded" %>
+        <div class="col-md-3">
+         <div class="offer">
+          <span class="fa fa-inr"><%=@item.price%></span>
+         </div>
+        </div>
+        <div class="col-md-12">
+         <p class="disclosure">
+          <%=@item.description%>
+         </p>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <div class="coupon-code">
+          <button class="btn btn-success">Add To Cart</button>
+          <span class="print">
+           <a href="#" class="btn btn-link"><i class="fa fa-lg fa-print"></i> Print Coupon</a>
+          </span>
+        </div>
+        <div class="exp">Expires: Sep 30, 2016</div>
+      </div>
+    </div>
+  </div>
+</div>
