@@ -48,9 +48,12 @@ class UsersController < ApplicationController
       render "new"
     end	
   end
+  
   def pastorders
     @pastorders = current_user.orders.includes(:items).where.not(items: {id: nil}).order(:id)
   end
+  
+  
   private
   def user_details
    params.require(:user).permit(:full_name,:display_name,:email,:password,:password_confirmation)

@@ -68,25 +68,30 @@
       
             <div class="menu-list">
       
-                <ul id="menu-content" class="menu-content collapse out">
-                    <li>
-                      <a href="#">
-                      <i class="fa fa-dashboard fa-lg"></i> Dashboard
-                      </a>
-                    </li>
+                <ul id="menu-content" class="menu-content collapse out">    
                   <% if current_user %>
                     <% if current_user.is_admin? %>
+                      <li>
+                       <a href="/admins/dashboard">
+                        <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                       </a>
+                      </li>
                       <li><a href="/users"><i class="fa fa-users fa-lg"></i> manage users</a></li>
                       <li><a href="/categories/index"><i class="fa fa-th-large fa-lg"></i>manage categories</a></li>
                     <%else%>
+                      <li>
+                       <a href="#">
+                        <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                       </a>
+                      </li>
                       <li><a href="/users/pastorders"><i class="fa fa-history fa-lg"></i>  your's orders</a></li>
-
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-user fa-lg"></i> Profile
+                        </a>
+                      </li>
                     <%end%> 
-                    <li>
-                     <a href="#">
-                      <i class="fa fa-user fa-lg"></i> Profile
-                     </a>
-                    </li>
+                    
                   <%end%> 
                 </ul>
          </div>

@@ -10,4 +10,11 @@ class CartController < ApplicationController
  def clear_cart
  	 session[:order_id] = nil
  end
+
+ def add_to_cart
+ raise params.inspect
+ end
+ def discard
+  raise params.inspect
+ end
 end

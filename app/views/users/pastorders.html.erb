@@ -1,4 +1,7 @@
 <style type="text/css">
+  .pastorders{
+  	margin-top: 40px;
+  }
   table {
     border: 1px solid;
     border-color: #000;
@@ -7,7 +10,7 @@
   	text-decoration: none;
   }
 </style>
-<div class="container" >
+<div class="container pastorders" >
 	<% if @pastorders == nil %>
 	<div class="alert alert-info" style = "margin-top: 200px">
 		<a href="/items" class="btn btn-xs btn-primary pull-right">place an order</a>

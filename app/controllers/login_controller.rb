@@ -16,6 +16,7 @@ class LoginController < ApplicationController
       if flash[:notice]
        redirect_to new_transaction_path
       else
+       reset_cart
        redirect_to items_path
       end
      end
@@ -25,8 +26,11 @@ class LoginController < ApplicationController
    end
   end 
   def logout
-    session[:order_id] = nil
-    session[:user_id] = nil
+    if current_order.item_orders.count >0
+      current_order.update(is_missed: true)
+      current_user.orders << current_order
+    end
+    reset_session
     redirect_to root_path
   end
   private 
@@ -34,5 +38,19 @@ class LoginController < ApplicationController
     if flash[:notice]
      flash[:notice] = "login" 
     end 
+   end
+   def reset_cart
+    if session[:order_id]
+     if prev_order
+      prev_order.item_orders.each do |item_order|
+       item_order.update(order_id: session[:order_id])
+      end
+     end
+    else
+     session[:order_id] = prev_order.id if prev_order
+    end
+   end
+   def prev_order
+    current_user.orders.find_by_is_missed(true)
    end
 end

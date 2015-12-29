@@ -61,6 +61,7 @@ class ItemsController < ApplicationController
   end
   def show
     @item = Item.find(params[:id])
+    @flag = ((current_order.item_orders.pluck(:item_id).include? @item.id) if current_order.item_orders.count > 0) ? 1:0 
     @item_order = current_order.item_orders.new if !admin
   end
   def edit

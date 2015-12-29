@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151218143823) do
+ActiveRecord::Schema.define(version: 20151229132927) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -45,20 +45,21 @@ ActiveRecord::Schema.define(version: 20151218143823) do
   add_index "items", ["category_id"], name: "index_items_on_category_id", using: :btree
 
   create_table "missed_orders", force: :cascade do |t|
-    t.integer  "order_id",   limit: 4
+    t.integer  "user_id",    limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
 
-  add_index "missed_orders", ["order_id"], name: "index_missed_orders_on_order_id", using: :btree
+  add_index "missed_orders", ["user_id"], name: "index_missed_orders_on_user_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id",         limit: 4
     t.integer  "status_id",       limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.float    "total_cost",      limit: 24
     t.string   "missed_order_id", limit: 255
+    t.boolean  "is_missed",                   default: false
   end
 
   add_index "orders", ["status_id"], name: "index_orders_on_status_id", using: :btree
@@ -102,7 +103,7 @@ ActiveRecord::Schema.define(version: 20151218143823) do
   add_foreign_key "item_orders", "items"
   add_foreign_key "item_orders", "orders"
   add_foreign_key "items", "categories"
-  add_foreign_key "missed_orders", "orders"
+  add_foreign_key "missed_orders", "users"
   add_foreign_key "orders", "statuses"
   add_foreign_key "orders", "users"
   add_foreign_key "wish_items", "items"

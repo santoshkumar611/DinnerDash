@@ -5,13 +5,15 @@ Rails.application.routes.draw do
    root 'items#index'
    get 'login/login' =>'login#login',as: :login_page
    post 'login/logincheck' => 'login#logincheck' ,as: :login_logincheck
-    get 'login/logout' => 'login#logout',as: :signout
+  get 'login/logout' => 'login#logout',as: :signout
+   
    # routes for users controller 
    
    get 'users/new' => 'users#new', as: :signup
    post 'users/create' => 'users#create', as: :users
    get 'users' => 'users#index',as: :all_users
-   get 'users/pastorders' => 'users#pastorders',as: :pastorders_path
+   get 'users/pastorders' => 'users#pastorders',as: :pastorders
+   get 'users/missedorders' => 'users#missedorders',as: :missedorders
    # routes for admins controller
    
    get 'admins/new' => 'admins#new', as: :adminsignup
@@ -30,6 +32,8 @@ Rails.application.routes.draw do
     resources :item_orders
     get 'cart/index' => "cart#index", as: :cart
     get 'cart/clear_cart' => "cart#clear_cart",as: :clear_cart
+    
+
     resources :transactions ,only: [:new,:create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

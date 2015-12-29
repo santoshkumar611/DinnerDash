@@ -1,5 +1,9 @@
 class AdminsController < ApplicationController
-  
+ 
+ def dashboard
+    # need to start
+ end
+ 
  def new
   	@admin = User.new
   	flash[:notice] = ""

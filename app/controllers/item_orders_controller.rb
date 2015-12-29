@@ -1,9 +1,7 @@
 class ItemOrdersController < ApplicationController
  
  def create
-
     @order = current_order
-    
     if @order.item_orders.count > 0 
       puts @order.item_orders.pluck(:item_id).include? params[:item_order][:item_id]
      if @order.item_orders.pluck(:item_id).include? params[:item_order][:item_id].to_i

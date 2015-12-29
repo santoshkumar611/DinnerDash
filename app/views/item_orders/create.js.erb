@@ -1,1 +1,4 @@
 $('.badge').html('<%= j render "count"%>')
+<% if flash[:action] %>
+	$('.coupon-code').html('<%= j render "message"%>')
+<% end %>
