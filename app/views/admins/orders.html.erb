@@ -1,0 +1,59 @@
+<style type="text/css">
+  .orders{
+    margin-top: 40px;
+  }
+  table {
+    border: 1px solid;
+    border-color: #000;
+  }
+  td{
+    text-decoration: none;
+  }
+</style>
+<script type="text/javascript">
+  $(function () {
+    $( '#table' ).searchable({
+        striped: true,
+        oddRow: { 'background-color': '#f5f5f5' },
+        evenRow: { 'background-color': '#fff' },
+        searchType: 'fuzzy'
+    });
+});
+</script>
+<script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script>
+<div class="container orders">
+  <div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+     <input type="search" id="search" value="" class="form-control" placeholder="Search by orders">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="table" id="table">
+        <thead>
+          <tr>
+            <th class="text-center">Order-id:</th>
+            <th class="text-center">User</th>
+            <th class="text-center">staus</th>
+            <th class="text-center">Placed_at/updated_at</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td class="text-center"><%=order.id%></td>
+              <td class="text-center"><%=order.user%></td>
+              <td class="text-center"><%=order.status%></td>
+              <td class="text-center"><%=time_ago_in_words(order.updated_at)%></td>
+              <td class="text-center"><%=link_to "delete",delete_order_path(order.id),class: "btn btn-danger btn-xs"%></td>
+            </tr>
+          <% end %>
+          <tr>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+    </div>
+  </div>
+</div>

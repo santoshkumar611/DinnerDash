@@ -1,0 +1,26 @@
+
+  <table class="table table-hover" id="dev-table">
+    <thead>
+      <tr>
+        <th>item</th>
+        <th>About item</th>
+        <th>price</th>
+        <th>action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% category.items.each do |item| %>
+      <% if current_user %>
+      <% if current_user.is_admin %>
+      <%= render "admin_item" ,item: item %>
+      <% else %>
+      <%= render "user_item" , item: item%>
+      <% end %>    
+      <%elsif%>
+      <tr>
+        <%= render "user_item",item: item %>
+      </tr>
+      <%end%> 
+      <%end%>     
+    </tbody>
+  </table>

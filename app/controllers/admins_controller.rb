@@ -1,10 +1,6 @@
 class AdminsController < ApplicationController
  
- def dashboard
-    # need to start
- end
- 
- def new
+  def new
   	@admin = User.new
   	flash[:notice] = ""
   end
@@ -42,8 +38,17 @@ class AdminsController < ApplicationController
      	flash[:notice] = @admin.errors.messages
       render "new"
     end	
-
+  end  
+  
+  def orders
+    @orders = Order.includes(:user,:status).all
   end
+  
+  def delete_order
+   Order.find(params[:id]).destroy
+   redirect_to orders_path
+  end
+  
   private
   def admin_details
    params.require(:user).permit(:full_name,:display_name,:email,:password,:password_confirmation)

@@ -32,7 +32,7 @@ class TransactionsController < ApplicationController
 			if @result.success?
 				current_user.update(braintree_customer_id: @result.transaction.customer_details.id) unless current_user.has_payment_info?
 				current_user.orders << current_order
-				current_order.update(total_cost: sum)
+				current_order.update(total_cost: sum,is_missed: false)
 				redirect_to clear_cart_path, notice: "Congraulations! Your transaction has been successfully!"
 
 			else

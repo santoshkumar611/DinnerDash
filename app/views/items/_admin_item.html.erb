@@ -1,0 +1,14 @@
+<tr>
+  <% var_img = "item_images/#{item.image}" %>
+  <td><%= image_tag var_img, :height => '140px', :width => '185px' %></td>
+  <td><strong><%=item.name%></strong><hr><%= item.description%></td>
+  <td><i class = "fa fa-rupee"><%=item.price%></i></td>
+  <td><%=link_to "edit",edit_item_path(item.id),class: "btn btn-sm btn-primary"%>
+    <% if item.is_available %>
+    <div class="un<%=item.id%>"><%=link_to "make it unavailable",unavailableitem_path(item.id),class: "btn btn-sm btn-info", remote: true%></div>
+    <% else %>
+    <div class="un<%=item.id%>"><%=link_to "make it available",unavailableitem_path(item.id),class: "btn btn-sm btn-info",remote: true%></div>
+    <% end %>
+    <%= link_to "delete",item_path(item.id),method: :delete,data: {confirm: 'Are you sure? your admin' },class: "btn btn-sm btn-danger" %>  
+  </td>
+</tr>

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
    root 'items#index'
    get 'login/login' =>'login#login',as: :login_page
    post 'login/logincheck' => 'login#logincheck' ,as: :login_logincheck
-  get 'login/logout' => 'login#logout',as: :signout
+   get 'login/logout' => 'login#logout',as: :signout
    
    # routes for users controller 
    
@@ -18,7 +18,9 @@ Rails.application.routes.draw do
    
    get 'admins/new' => 'admins#new', as: :adminsignup
    post 'admins/create' => 'admins#create', as: :admins
-
+   get 'admins/orders' => 'admins#orders', as: :orders
+   get 'admins/delete_order/:id'=> 'admins#delete_order',as: :delete_order
+   
    # routes for categories controller
     get 'categories/index' => 'categories#index',as: :allcategories
     get 'categories/new' => 'categories#new',as: :newcategory
