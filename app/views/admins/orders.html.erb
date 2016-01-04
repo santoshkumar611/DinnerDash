@@ -1,4 +1,4 @@
-<style type="text/css">
+<!--<style type="text/css">
   .orders{
     margin-top: 40px;
   }
@@ -43,8 +43,8 @@
           <% @orders.each do |order| %>
             <tr>
               <td class="text-center"><%=order.id%></td>
-              <td class="text-center"><%=order.user%></td>
-              <td class="text-center"><%=order.status%></td>
+              <td class="text-center"><%=order.user.email%></td>
+              <td class="text-center"><%=order.status.name%></td>
               <td class="text-center"><%=time_ago_in_words(order.updated_at)%></td>
               <td class="text-center"><%=link_to "delete",delete_order_path(order.id),class: "btn btn-danger btn-xs"%></td>
             </tr>
@@ -54,6 +54,146 @@
         </tbody>
       </table>
       <hr>
+    </div>
+  </div>
+</div>-->
+
+
+
+<style type="text/css">
+  .tabbable-panel {
+    border:2px solid #337ab7 ;
+
+    padding: 10px;
+
+  }
+  .tabbable-line > .nav-tabs {
+    border: 0;
+    margin: 0px;
+  }
+  .tabbable-line > .nav-tabs > li {
+    margin-right: 2px;
+  }
+  .tabbable-line > .nav-tabs > li > a {
+    border: 0;
+    margin-right: 0;
+    color: #737373;
+  }
+  .tabbable-line > .nav-tabs > li > a > i {
+    color: #a6a6a6;
+  }
+  .tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
+    border-bottom: 4px solid #fbcdcf;
+  }
+  .tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
+    border: 0;
+    background: none !important;
+    color: #333333;
+  }
+  .tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
+    color: #a6a6a6;
+  }
+  .tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
+    margin-top: 0px;
+  }
+  .tabbable-line > .nav-tabs > li.active {
+    border-bottom: 4px solid #f3565d;
+    position: relative;
+  }
+  .tabbable-line > .nav-tabs > li.active > a {
+    border: 0;
+    color: #337ab7;
+  }
+  .tabbable-line > .nav-tabs > li.active > a > i {
+    color: #337ab7;
+  }
+  .tabbable-line > .tab-content {
+    margin-top: -3px;
+    background-color: #fff;
+    border: 0;
+    border-top: 1px solid #eee;
+    padding: 15px 0;
+  }
+  .portlet .tabbable-line > .tab-content {
+    padding-bottom: 0;
+  }
+  @media (max-width: 1500px) {
+    .item_index {
+      width: 1000px;
+
+      top : 50px;
+    }
+  }
+  
+</style>
+
+<div class="container item_index">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>orders</h3>
+      <div class="tabbable-panel">
+        <div class="tabbable-line">
+          <ul class="nav nav-tabs item_nav">
+            <li class="active">
+              <a href = "#tab_default_1" data-toggle="tab">
+                ordered
+              </a>
+            </li>
+            <li>
+              <a href = "#tab_default_2" data-toggle="tab">
+                paid
+              </a>
+            </li>
+            <li>
+              <a href = "#tab_default_3" data-toggle="tab">
+                completed
+              </a>
+            </li>
+            <li>
+              <a href = "#tab_default_4" data-toggle="tab">
+                unknown
+              </a>
+            </li>
+            <li>
+              <a href = "#tab_default_5" data-toggle="tab">
+                cancelled
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <% @orders.each do |order| %>
+              <% if order.user %>
+                <% case order.status_id %>
+                  <% when 1 %>  
+                    <div class="tab-pane active fade in" id="tab_default_1">
+                      1
+                      <%= render "single_order",order: order%>
+                    </div>
+                  <% when 4 %>
+                    2
+                    <div class="tab-pane active fade in" id="tab_default_2">
+                      <%= render "single_order",order: order%>
+                    </div>
+                  <% when 2 %>
+                    3
+                    <div class="tab-pane active fade in" id="tab_default_3">
+                      <%= render "single_order",order: order%>
+                    </div>
+                  <% when 3 %>
+                    4
+                    <div class="tab-pane active fade in" id="tab_default_5">
+                      <%= render "single_order",order: order%>
+                    </div>
+                  <%end%>
+              <% else %>
+                <div class="tab-pane active fade in" id="tab_default_4">
+                  <%= render "unknown_order",order: order%>
+                </div>
+              <% end %>
+            <% end %>  
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
