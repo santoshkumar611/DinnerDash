@@ -1,0 +1,31 @@
+<% if @unknown_orders %>
+	<div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+     <input type="search" id="search" value="" class="form-control" placeholder="Search by orders">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="table" id="table">
+        <thead>
+          <tr>
+            <th class="text-center">Order-id:</th>
+            <th class="text-center">Placed_at/updated_at</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @unknown_orders.each do |order| %>
+            <tr id="unknown_order_<%=order.id%>">
+              <td class="text-center"><%=order.id%></td>
+              <td class="text-center"><%=time_ago_in_words(order.updated_at)%></td>
+              <td class="text-center"><%=link_to "delete",delete_order_path(order.id),class: "btn btn-danger btn-xs",remote: true%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% else %>
+ <center> <h6>no orders under this status</h6> </center>
+<% end %>

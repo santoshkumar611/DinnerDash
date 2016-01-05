@@ -1,71 +1,12 @@
-<!--<style type="text/css">
-  .orders{
-    margin-top: 40px;
-  }
-  table {
-    border: 1px solid;
-    border-color: #000;
-  }
-  td{
-    text-decoration: none;
-  }
-</style>
-<script type="text/javascript">
-  $(function () {
-    $( '#table' ).searchable({
-        striped: true,
-        oddRow: { 'background-color': '#f5f5f5' },
-        evenRow: { 'background-color': '#fff' },
-        searchType: 'fuzzy'
-    });
-});
-</script>
-<script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script>
-<div class="container orders">
-  <div class="row">
-    <div class="col-lg-4 col-lg-offset-4">
-     <input type="search" id="search" value="" class="form-control" placeholder="Search by orders">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <table class="table" id="table">
-        <thead>
-          <tr>
-            <th class="text-center">Order-id:</th>
-            <th class="text-center">User</th>
-            <th class="text-center">staus</th>
-            <th class="text-center">Placed_at/updated_at</th>
-            <th class="text-center">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @orders.each do |order| %>
-            <tr>
-              <td class="text-center"><%=order.id%></td>
-              <td class="text-center"><%=order.user.email%></td>
-              <td class="text-center"><%=order.status.name%></td>
-              <td class="text-center"><%=time_ago_in_words(order.updated_at)%></td>
-              <td class="text-center"><%=link_to "delete",delete_order_path(order.id),class: "btn btn-danger btn-xs"%></td>
-            </tr>
-          <% end %>
-          <tr>
-          </tr>
-        </tbody>
-      </table>
-      <hr>
-    </div>
-  </div>
-</div>-->
-
-
-
 <style type="text/css">
   .tabbable-panel {
     border:2px solid #337ab7 ;
 
     padding: 10px;
 
+  }
+  .table {
+    border:2px solid #337ab7 ;    
   }
   .tabbable-line > .nav-tabs {
     border: 0;
@@ -126,7 +67,17 @@
   }
   
 </style>
-
+<script type="text/javascript">
+  $(function () {
+    $( '.table' ).searchable({
+        striped: true,
+        oddRow: { 'background-color': '#f5f5f5' },
+        evenRow: { 'background-color': '#fff' },
+        searchType: 'fuzzy'
+    });
+});
+</script>
+<script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script>
 <div class="container item_index">
   <div class="row">
     <div class="col-md-12">
@@ -134,63 +85,42 @@
       <div class="tabbable-panel">
         <div class="tabbable-line">
           <ul class="nav nav-tabs item_nav">
-            <li class="active">
-              <a href = "#tab_default_1" data-toggle="tab">
-                ordered
-              </a>
-            </li>
+            <% @statuses.each_with_index do |status,i| %>
+              <% if i == 0 %>
+                <li class="active">
+                  <a href = "#tab_default_<%=status.id%>" data-toggle="tab">
+                    <%=status.name%>
+                  </a>
+                </li>
+              <% else %>
+                <li>
+                  <a href = "#tab_default_<%=status.id%>" data-toggle="tab">
+                    <%=status.name%>
+                  </a>
+                </li>
+              <% end %>    
+            <% end %>
             <li>
-              <a href = "#tab_default_2" data-toggle="tab">
-                paid
-              </a>
-            </li>
-            <li>
-              <a href = "#tab_default_3" data-toggle="tab">
-                completed
-              </a>
-            </li>
-            <li>
-              <a href = "#tab_default_4" data-toggle="tab">
+              <a href = "#tab_default_unknown" data-toggle="tab">
                 unknown
-              </a>
-            </li>
-            <li>
-              <a href = "#tab_default_5" data-toggle="tab">
-                cancelled
               </a>
             </li>
           </ul>
           <div class="tab-content">
-            <% @orders.each do |order| %>
-              <% if order.user %>
-                <% case order.status_id %>
-                  <% when 1 %>  
-                    <div class="tab-pane active fade in" id="tab_default_1">
-                      1
-                      <%= render "single_order",order: order%>
-                    </div>
-                  <% when 4 %>
-                    2
-                    <div class="tab-pane active fade in" id="tab_default_2">
-                      <%= render "single_order",order: order%>
-                    </div>
-                  <% when 2 %>
-                    3
-                    <div class="tab-pane active fade in" id="tab_default_3">
-                      <%= render "single_order",order: order%>
-                    </div>
-                  <% when 3 %>
-                    4
-                    <div class="tab-pane active fade in" id="tab_default_5">
-                      <%= render "single_order",order: order%>
-                    </div>
-                  <%end%>
-              <% else %>
-                <div class="tab-pane active fade in" id="tab_default_4">
-                  <%= render "unknown_order",order: order%>
-                </div>
+            <% @statuses.each_with_index do |status,i| %>
+              <% if i == 0 %>
+                <div class="tab-pane active fade in" id="tab_default_<%=status.id%>">
+                  <%= render "single_order",status: status%>
+                </div> 
+              <% else %>    
+                <div class="tab-pane fade" id="tab_default_<%=status.id%>">
+                  <%= render "single_order",status: status%>
+                </div> 
               <% end %>
-            <% end %>  
+            <% end %>
+            <div class="tab-pane fade" id="tab_default_unknown">
+              <%= render "unknown_order" %>
+            </div>
           </div>
         </div>
       </div>
