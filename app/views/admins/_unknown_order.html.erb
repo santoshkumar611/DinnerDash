@@ -1,6 +1,6 @@
 <% if @unknown_orders %>
-	<div class="row">
-    <div class="col-lg-4 col-lg-offset-4">
+  <div class="row">
+    <div class="pull-left">
      <input type="search" id="search" value="" class="form-control" placeholder="Search by orders">
     </div>
   </div>
@@ -16,10 +16,10 @@
         </thead>
         <tbody>
           <% @unknown_orders.each do |order| %>
-            <tr id="unknown_order_<%=order.id%>">
-              <td class="text-center"><%=order.id%></td>
-              <td class="text-center"><%=time_ago_in_words(order.updated_at)%></td>
-              <td class="text-center"><%=link_to "delete",delete_order_path(order.id),class: "btn btn-danger btn-xs",remote: true%></td>
+            <tr >
+              <td class="text-center" id="unknown_order_<%=order.id%>"><%=order.id%></td>
+              <td class="text-center" id="unknown_order_<%=order.id%>"><%=time_ago_in_words(order.updated_at)%></td>
+              <td class="text-center" id="unknown_order_<%=order.id%>"><%=link_to "delete",delete_order_path(order.id),class: "btn btn-danger btn-xs",remote: true%></td>
             </tr>
           <% end %>
         </tbody>

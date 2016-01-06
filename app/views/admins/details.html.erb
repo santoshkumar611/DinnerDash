@@ -1,0 +1,82 @@
+<style type="text/css">
+.content {
+	padding: 30px;
+	background: #f1f3fa;
+}
+
+.margin-bottom-30 {
+	margin-bottom: 30px;
+}
+
+/* Portlet */
+.portlet {
+	background: #fff;
+	padding: 20px;
+}
+
+.portlet.portlet-gray {
+	background: #f7f7f7;
+}
+
+.portlet.portlet-bordered {
+	border: 1px solid #eee;
+}
+
+/* Portlet Title */
+.portlet-title {
+	padding: 0;
+  	min-height: 40px;
+  	border-bottom: 1px solid #eee;
+  	margin-bottom: 18px;
+}
+
+.caption {
+	float: left;
+	display: inline-block;
+	font-size: 18px;
+	line-height: 18px;
+}
+.caption i {
+	color: #777;
+	font-size: 15px;
+	font-weight: 300;
+	margin-top: 3px;
+}
+
+.caption-subject {
+	color: #666;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.caption-helper {
+	padding: 0;
+	margin: 0;
+	line-height: 13px;
+	color: #9eacb4;
+	font-size: 13px;
+	font-weight: 400;
+}
+
+</style>
+<div class="content">
+	<div class = "container">
+		<div class="col-md-6 margin-bottom-30">
+			<div class="portlet">
+				<div class="portlet-title">
+					<div class="caption">
+						<i class="fa fa-bars"></i>
+						<span class="caption-subject text-uppercase"> Order - <%=@order.id%></span>
+						<span class="caption-helper">order full details...</span>
+					</div>
+				</div>
+				<div class="portlet-body">
+					<h6>placed_at : <%=@order.updated_at.in_time_zone("New Delhi").strftime("%I:%M %p %^b %Y")%>  (<%=time_ago_in_words(@order.updated_at)%> ago ) </h6>
+					<h6>purchaser Name: <%=@order.user.full_name%> (<%=@order.user.email%>)</h6>
+          <div class="table">
+          </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

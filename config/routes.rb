@@ -19,12 +19,13 @@ Rails.application.routes.draw do
    get 'admins/new' => 'admins#new', as: :adminsignup
    post 'admins/create' => 'admins#create', as: :admins
    get 'admins/orders' => 'admins#orders', as: :orders
-   get 'admins/paid/:id' => 'admins#paid', as: :paid
-   get 'admins/cancel/:id' => 'admins#cancel',as: :cancel
    get 'admins/details/:id' => 'admins#details',as: :details
-   get 'admins/complete/:id' => 'admins#complete',as: :complete
+
    get 'admins/delete_order/:id'=> 'admins#delete_order',as: :delete_order
-   # routes for categories controller
+
+   post 'admins/order_status_update' => 'admins#order_status_update',as: :order_status_update
+   
+  # routes for categories controller
     get 'categories/index' => 'categories#index',as: :allcategories
     get 'categories/new' => 'categories#new',as: :newcategory
     post 'categories/create' => 'categories#create',as: :categories

@@ -58,6 +58,9 @@
   .portlet .tabbable-line > .tab-content {
     padding-bottom: 0;
   }
+  .btn {
+    display: inline;
+  }
   @media (max-width: 1500px) {
     .item_index {
       width: 1000px;
@@ -75,6 +78,15 @@
         evenRow: { 'background-color': '#fff' },
         searchType: 'fuzzy'
     });
+    var lastTab = localStorage.getItem('lastTab');
+    if (lastTab) {
+        $('[href="' + lastTab + '"]').tab('show');
+    }
+
+    $(".order_nav a").click(function() {
+       localStorage.setItem('lastTab', $(this).attr('href'));
+       location.reload();
+    });
 });
 </script>
 <script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script>
@@ -84,7 +96,7 @@
       <h3>orders</h3>
       <div class="tabbable-panel">
         <div class="tabbable-line">
-          <ul class="nav nav-tabs item_nav">
+          <ul class="nav nav-tabs order_nav">
             <% @statuses.each_with_index do |status,i| %>
               <% if i == 0 %>
                 <li class="active">

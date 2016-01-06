@@ -1,0 +1,2 @@
+$("#single_order_<%=@order.id%>").parent()
+.replaceWith("<tr><td class = 'text-center' colspan='5'>  order <%=@order.id%> moved to <%=@order.status.name%></td></tr>");

@@ -41,31 +41,26 @@ class AdminsController < ApplicationController
   end  
   
   def delete_order
-   Order.find(params[:id]).destroy
+    @id = params[:id]
+   get_order.destroy
   end
 
   def orders
     @statuses = Status.includes(:orders).all
     @unknown_orders = Order.where(user_id: nil)
   end
-
-  def details
-   raise params.inspect
+  
+  def order_status_update
+    @order = Order.find(params[:order_id])
+    @order.update(status_id: params[:status_id])  
   end
   
-  def cancel
-    raise params.inspect
+  def details
+   @order = Order.includes(:items).find(params[:id])
   end
-
-  def paid
-    raise params.inspect
-  end
-
-  def completed
-    raise params.inspect
-  end
-
+  
   private
+
   def admin_details
    params.require(:user).permit(:full_name,:display_name,:email,:password,:password_confirmation)
   end 

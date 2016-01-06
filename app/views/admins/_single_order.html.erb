@@ -3,6 +3,7 @@
 	  <div class=" pull-left">
 	   <input type="search" id="search" value="" class="form-control" placeholder="Search by orders">
 	  </div>
+	  <div class="message"></div>
 	</div>
 	<div class="row" style="margin-top: 10px;">
 	  <div class="col-lg-12">
@@ -20,20 +21,20 @@
 		      <% status.orders.each do |order| %>
 			      <% if order.user %>
 			        <tr>
-			          <td class="text-center"><%=order.id%></td>
+			          <td class="text-center" id = "single_order_<%=order.id%>"><%=order.id%></td>
 			          <td class="text-center"><%=order.user.email%></td>
 			          <td class="text-center"><%=order.status.name%></td>
 			          <td class="text-center"><%=time_ago_in_words(order.updated_at)%></td>
 			          <% if status.name == "ordered" %>
-			          	<td class="text-center"> 
-			          		<%=link_to "mark as paid" , paid_path(order.id),class: "btn btn-success btn-xs",remote: true%>
-			          		<%=link_to "cancel",cancel_path(order.id),class: "btn btn-danger btn-xs",remote: true%>
+			          	<td class="text-center" > 
+			          		<%= render "order_status_form",order_id: order.id,status_id: 2 %>
+			          		<%= render "order_status_form",order_id: order.id,status_id: 4 %>
 			          		<%=link_to "details",details_path(order.id),class: "btn btn-info btn-xs"%>  
 			          	</td>
 			          <% elsif status.name == "paid" %>
 			          	<td class="text-center"> 
-			          		<%=link_to "mark as completed" , complete_path(order.id),class: "btn btn-success btn-xs",remote: true%>
-			          		<%=link_to "cancel",cancel_path(order.id),class: "btn btn-danger btn-xs",remote: true%>  
+			          		<%= render "order_status_form",order_id: order.id,status_id: 3 %>
+			          		<%= render "order_status_form",order_id: order.id,status_id: 4 %>  
 			          	  <%=link_to "details",details_path(order.id),class: "btn btn-info btn-xs"%>
 			          	</td>
 			          <% else %>

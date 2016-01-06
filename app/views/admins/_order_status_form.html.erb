@@ -1,0 +1,11 @@
+<%= form_tag('/admins/order_status_update',remote: true) do %>
+	<%= hidden_field_tag 'order_id',order_id %>
+	<%= hidden_field_tag 'status_id',status_id %>
+  <% if status_id == 2 %>
+	  <%= submit_tag "paid",class: "btn btn-success btn-xs" %>
+  <% elsif status_id == 3 %>
+    <%= submit_tag "completed",class: "btn btn-success btn-xs" %>
+  <% else %>
+  	<%= submit_tag "cancel",class: "btn btn-danger btn-xs" %>
+  <% end %>
+<%end%>

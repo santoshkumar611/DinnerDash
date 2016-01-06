@@ -1,1 +1,2 @@
-$("#unknown_order_<%=@id%>").html('<% j render "delete_order"%>')
+$("#unknown_order_<%=@id%>").parent()
+.replaceWith("<tr><td class = 'text-center' colspan='3'>no longer available this order <%=@id%></td></tr>");
