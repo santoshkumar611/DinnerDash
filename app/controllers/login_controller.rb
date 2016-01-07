@@ -41,11 +41,23 @@ class LoginController < ApplicationController
    end
    def reset_cart
     if session[:order_id]
-     if prev_order
-      prev_order.item_orders.each do |item_order|
-       item_order.update(order_id: session[:order_id])
+      if prev_order
+        prev_order.item_orders.each do |prev_item_order|
+          @order = current_order
+          if @order.item_orders.count > 0
+            if @order.item_orders.pluck(:item_id).include? prev_item_order.item_id
+              item_order =  @order.item_orders.find_by_item_id(prev_item_order.item_id)
+              item_order.update(quantity: item_order.quantity+1,
+                         price: Item.find(prev_item_order.item_id).price*(item_order.quantity+1))
+            else
+            prev_item_order.update(order_id: session[:order_id])
+            end
+          else
+            prev_item_order.update(order_id: session[:order_id])
+          end 
+        end
+        prev_order.destroy
       end
-     end
     else
      session[:order_id] = prev_order.id if prev_order
     end

@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
    end
   end
+
   def admin
     if current_user
       current_user.is_admin == true
@@ -17,12 +18,15 @@ class ApplicationController < ActionController::Base
       false
     end
   end
+  
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
+  
   def categories
     @categories = Category.all
   end
+  
   def current_order
     if !session[:order_id].nil?
       Order.find(session[:order_id])
@@ -30,6 +34,7 @@ class ApplicationController < ActionController::Base
       Order.new(status_id: 1)
     end
   end
+  
   def current_order_items
     if !session[:order_id].nil?
       count = Order.find(session[:order_id]).item_orders.count
@@ -37,4 +42,9 @@ class ApplicationController < ActionController::Base
       count = 0
     end
   end
+
+  def sum(id)
+      @sum = ItemOrder.find_by_sql("
+        SELECT SUM(price) AS price FROM item_orders where item_orders.order_id = #{id}")[0].price
+    end
 end

@@ -57,6 +57,7 @@ class AdminsController < ApplicationController
   
   def details
    @order = Order.includes(:items).find(params[:id])
+   @cost = sum(@order.id)
   end
   
   private

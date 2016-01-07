@@ -71,10 +71,31 @@
 					</div>
 				</div>
 				<div class="portlet-body">
-					<h6>placed_at : <%=@order.updated_at.in_time_zone("New Delhi").strftime("%I:%M %p %^b %Y")%>  (<%=time_ago_in_words(@order.updated_at)%> ago ) </h6>
+					<h6>placed_at: <%=@order.updated_at.in_time_zone("New Delhi").strftime("%I:%M %p %^b %Y")%>  (<%=time_ago_in_words(@order.updated_at)%> ago ) </h6>
 					<h6>purchaser Name: <%=@order.user.full_name%> (<%=@order.user.email%>)</h6>
           <div class="table">
+            <h6>items ordered:</h6>
+          	<table class="table" style="border: 1px solid">
+          		<thead>
+          			<th>item</th>
+          			<th>quantity</th>
+          			<th>price</th>
+          			<th>subtotal</th>
+          		</thead>
+          		<tbody>
+          			<%@order.item_orders.each do |item_order| %>
+          				<tr>
+          					<td class="text-center"><%=link_to "#{item_order.item.name}",item_path(item_order.item.id)%></td>
+          					<td class="text-center"><%=item_order.quantity%></td>
+          					<td class="text-center"><%=item_order.item.price%></td>
+          					<td class="text-center"><%=item_order.price%></td>
+          				</tr>
+          			<% end %>
+          		</tbody>
+          	</table>
           </div>
+          <div class="pull-left">Total: <i class = "fa fa-inr"></i> <%=@cost%></div>
+          <div class="pull-right">Status: <b><%=@order.status.name%></b></div>
 				</div>
 			</div>
 		</div>
